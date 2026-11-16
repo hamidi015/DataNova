@@ -106,3 +106,21 @@ st.write(f"Maximum Revenue: {df['Revenue'].max()}")
 st.write(f"Minimum Revenue: {df['Revenue'].min()}")
 
 st.write(f"Average Revenue: {df['Revenue'].mean():.2f}")
+
+st.subheader("Business Recommendation")
+
+st.info(
+    f"Recommendation: Focus on {best_product} because it generates the highest revenue."
+)
+
+st.subheader("Profit Statistics")
+
+st.write(f"Maximum Profit: {df['Profit'].max()}")
+
+st.write(f"Minimum Profit: {df['Profit'].min()}")
+
+st.write(f"Average Profit: {df['Profit'].mean():.2f}")
+
+st.subheader("Project Status")
+
+st.success("✅ DataNova v1.0 Successfully Running")
