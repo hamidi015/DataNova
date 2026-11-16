@@ -22,9 +22,31 @@ if uploaded_file is None:
 
 df = pd.read_csv(uploaded_file)
 
+selected_product = st.selectbox(
+    "Choose a Product",
+    df["Product"]
+)
+
+filtered_df = df[
+    df["Product"] == selected_product
+]
+
+selected_revenue = filtered_df["Revenue"].sum()
+
+selected_profit = filtered_df["Profit"].sum()
+
+st.subheader("Selected Product")
+
+st.write(
+    f"You selected: {selected_product}"
+)
+
+st.dataframe (filtered_df)
+
 st.subheader("Sales Data")
 
-st.dataframe(df)
+st.dataframe(filtered_df)
+
 
 st.subheader("Dataset Preview")
 
@@ -38,12 +60,14 @@ total_profit = df["Profit"].sum()
 col1, col2 = st.columns(2)
 
 with col1:
-    st.metric("Total Revenue", total_revenue)
+    st.metric("Selected Revenue", selected_revenue)
 
 with col2:
-    st.metric("Total Profit", total_profit)
+    st.metric("Selected Profit", selected_profit)
 
-profit_margin = (total_profit / total_revenue) * 100
+profit_margin = (
+    selected_profit / selected_revenue
+) * 100
 
 st.metric(
     "Profit Margin %",
@@ -82,9 +106,9 @@ st.subheader("Automatic Summary Generator")
 summary = f"""
 The dataset contains {len(df)} products.
 
-Total revenue is {total_revenue}.
+Selected revenue is {selected_revenue}.
 
-Total profit is {total_profit}.
+Selected profit is {selected_profit}.
 
 The best performing product is {best_product}.
 
