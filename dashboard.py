@@ -77,6 +77,7 @@ st.subheader("Dataset Insights")
 st.write(f"Rows: {df.shape[0]}")
 
 st.write(f"Columns: {df.shape[1]}")
+st.write(f"Total Cells: {df.shape[0] * df.shape[1]}")
 
 st.write("Column Names:")
 
