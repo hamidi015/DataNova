@@ -56,6 +56,12 @@ st.bar_chart(
     df.set_index("Product")["Revenue"]
 )
 
+st.subheader("Revenue Table")
+
+st.dataframe(
+    df[["Product", "Revenue"]]
+)
+
 st.subheader("Profit by Product")
 
 st.bar_chart(
@@ -201,4 +207,10 @@ st.subheader("Product Summary")
 
 st.write(
     f"Total Products Analyzed: {len(df)}"
+)
+
+st.markdown("---")
+
+st.caption(
+    "DataNova v1.8 | Built with Python, Pandas and Streamlit"
 )
