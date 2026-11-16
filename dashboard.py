@@ -156,3 +156,14 @@ if total_revenue >= 2000:
     st.success("Excellent Revenue Performance")
 else:
     st.warning("Revenue Performance Needs Improvement")
+
+st.subheader("Product Ranking")
+
+ranking = df.sort_values(
+    by="Revenue",
+    ascending=False
+)
+
+st.dataframe(
+    ranking[["Product", "Revenue"]]
+)
