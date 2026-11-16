@@ -28,7 +28,9 @@ st.dataframe(df)
 
 st.subheader("Dataset Preview")
 
-st.write(df.head())
+st.dataframe(df.head())
+
+
 
 total_revenue = df["Revenue"].sum()
 total_profit = df["Profit"].sum()
