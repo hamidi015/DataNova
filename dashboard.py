@@ -1,9 +1,13 @@
 import streamlit as st
 import pandas as pd
 
-df = pd.read_csv("data/sales.csv")
+uploaded_file = st.file_uploader(
+    "Upload a CSV file",
+    type=["csv"]
+)
 
 st.title("🚀 DataNova Dashboard")
+
 st.markdown(
     """
     Welcome to DataNova.
@@ -11,6 +15,12 @@ st.markdown(
     Upload, analyze, and visualize business data in real time.
     """
 )
+
+if uploaded_file is None:
+    st.info("Please upload a CSV file.")
+    st.stop()
+
+df = pd.read_csv(uploaded_file)
 
 st.subheader("Sales Data")
 
@@ -32,6 +42,7 @@ st.subheader("Revenue by Product")
 st.bar_chart(
     df.set_index("Product")["Revenue"]
 )
+
 st.subheader("Profit by Product")
 
 st.bar_chart(
@@ -46,6 +57,7 @@ best_product = df.loc[
 st.success(
     f"🏆 Best Product: {best_product}"
 )
+
 st.subheader("Executive Summary")
 
 st.write(
@@ -59,3 +71,13 @@ st.write(
     {best_product} generated the highest revenue.
     """
 )
+
+st.subheader("Dataset Insights")
+
+st.write(f"Rows: {df.shape[0]}")
+
+st.write(f"Columns: {df.shape[1]}")
+
+st.write("Column Names:")
+
+st.write(list(df.columns))
