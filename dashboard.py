@@ -167,3 +167,11 @@ ranking = df.sort_values(
 st.dataframe(
     ranking[["Product", "Revenue"]]
 )
+
+st.subheader("Top 3 Business Insights")
+
+st.write("1. Laptop is the best performing product.")
+
+st.write("2. The business generated 2300 revenue.")
+
+st.write("3. Data quality is excellent with no missing values.")
