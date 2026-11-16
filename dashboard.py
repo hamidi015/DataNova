@@ -4,6 +4,13 @@ import pandas as pd
 df = pd.read_csv("data/sales.csv")
 
 st.title("🚀 DataNova Dashboard")
+st.markdown(
+    """
+    Welcome to DataNova.
+
+    Upload, analyze, and visualize business data in real time.
+    """
+)
 
 st.subheader("Sales Data")
 
