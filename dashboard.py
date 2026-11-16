@@ -71,19 +71,21 @@ st.success(
     f"🏆 Best Product: {best_product}"
 )
 
-st.subheader("Executive Summary")
+st.subheader("Automatic Summary Generator")
 
-st.write(
-    f"""
-    The dataset contains {len(df)} products.
+summary = f"""
+The dataset contains {len(df)} products.
 
-    Total revenue is {total_revenue}.
+Total revenue is {total_revenue}.
 
-    Total profit is {total_profit}.
+Total profit is {total_profit}.
 
-    {best_product} generated the highest revenue.
-    """
-)
+The best performing product is {best_product}.
+
+Profit margin is {profit_margin:.2f}%.
+"""
+
+st.write(summary)
 
 st.subheader("Dataset Insights")
 
@@ -170,8 +172,27 @@ st.dataframe(
 
 st.subheader("Top 3 Business Insights")
 
-st.write("1. Laptop is the best performing product.")
+st.write(
+    f"1. {best_product} is the best performing product."
+)
 
-st.write("2. The business generated 2300 revenue.")
+st.write(
+    f"2. The business generated {total_revenue} revenue."
+)
 
-st.write("3. Data quality is excellent with no missing values.")
+st.write(
+    f"3. Dataset contains {missing_values} missing values."
+)
+
+
+
+st.subheader("Top Product Share")
+
+top_share = (
+    df["Revenue"].max()
+    / total_revenue
+) * 100
+
+st.write(
+    f"{best_product} contributes {top_share:.2f}% of total revenue."
+)
