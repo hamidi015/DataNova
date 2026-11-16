@@ -26,6 +26,10 @@ st.subheader("Sales Data")
 
 st.dataframe(df)
 
+st.subheader("Dataset Preview")
+
+st.write(df.head())
+
 total_revenue = df["Revenue"].sum()
 total_profit = df["Profit"].sum()
 
@@ -82,3 +86,13 @@ st.write(f"Total Cells: {df.shape[0] * df.shape[1]}")
 st.write("Column Names:")
 
 st.write(list(df.columns))
+st.subheader("Data Quality Check")
+
+missing_values = df.isnull().sum().sum()
+
+st.write(f"Missing Values: {missing_values}")
+
+if missing_values == 0:
+    st.success("Data Quality Score: 100%")
+else:
+    st.warning("Data Quality Score: Needs Review")
