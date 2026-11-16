@@ -39,3 +39,16 @@ best_product = df.loc[
 st.success(
     f"🏆 Best Product: {best_product}"
 )
+st.subheader("Executive Summary")
+
+st.write(
+    f"""
+    The dataset contains {len(df)} products.
+
+    Total revenue is {total_revenue}.
+
+    Total profit is {total_profit}.
+
+    {best_product} generated the highest revenue.
+    """
+)
