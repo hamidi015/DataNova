@@ -115,6 +115,15 @@ st.info(
 
 st.subheader("Profit Statistics")
 
+st.subheader("Business Health Score")
+
+score = 100
+
+if missing_values > 0:
+    score -= 20
+
+st.success(f"Business Health Score: {score}/100")
+
 st.write(f"Maximum Profit: {df['Profit'].max()}")
 
 st.write(f"Minimum Profit: {df['Profit'].min()}")
@@ -124,3 +133,17 @@ st.write(f"Average Profit: {df['Profit'].mean():.2f}")
 st.subheader("Project Status")
 
 st.success("✅ DataNova v1.0 Successfully Running")
+
+st.subheader("Smart Business Insight")
+
+if total_profit > 500:
+    st.success("Business is performing well. Profit is above 500.")
+else:
+    st.warning("Business profit needs improvement.")
+    
+st.subheader("Revenue Rating")
+
+if total_revenue >= 2000:
+    st.success("Excellent Revenue Performance")
+else:
+    st.warning("Revenue Performance Needs Improvement")
