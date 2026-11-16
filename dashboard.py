@@ -78,6 +78,7 @@ st.write(
 
 st.subheader("Dataset Insights")
 
+
 st.write(f"Rows: {df.shape[0]}")
 
 st.write(f"Columns: {df.shape[1]}")
@@ -86,6 +87,7 @@ st.write(f"Total Cells: {df.shape[0] * df.shape[1]}")
 st.write("Column Names:")
 
 st.write(list(df.columns))
+
 st.subheader("Data Quality Check")
 
 missing_values = df.isnull().sum().sum()
@@ -96,3 +98,11 @@ if missing_values == 0:
     st.success("Data Quality Score: 100%")
 else:
     st.warning("Data Quality Score: Needs Review")
+
+st.subheader("Revenue Statistics")
+
+st.write(f"Maximum Revenue: {df['Revenue'].max()}")
+
+st.write(f"Minimum Revenue: {df['Revenue'].min()}")
+
+st.write(f"Average Revenue: {df['Revenue'].mean():.2f}")
