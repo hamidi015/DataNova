@@ -43,6 +43,13 @@ with col1:
 with col2:
     st.metric("Total Profit", total_profit)
 
+profit_margin = (total_profit / total_revenue) * 100
+
+st.metric(
+    "Profit Margin %",
+    f"{profit_margin:.2f}%"
+)
+
 st.subheader("Revenue by Product")
 
 st.bar_chart(
