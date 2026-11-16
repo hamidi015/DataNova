@@ -196,3 +196,9 @@ top_share = (
 st.write(
     f"{best_product} contributes {top_share:.2f}% of total revenue."
 )
+
+st.subheader("Product Summary")
+
+st.write(
+    f"Total Products Analyzed: {len(df)}"
+)
