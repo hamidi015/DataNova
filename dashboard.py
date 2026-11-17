@@ -1,6 +1,7 @@
 import plotly.express as px
 import streamlit as st
 import pandas as pd
+from modules.pdf_report import generate_pdf_report
 
 uploaded_file = st.file_uploader(
     "Upload a CSV or Excel file",
@@ -350,6 +351,7 @@ st.plotly_chart(
     trend_fig,
     key="revenue_trend_chart"
 )
+
 st.subheader("Revenue Trend Insight")
 
 if df["Revenue"].iloc[0] > df["Revenue"].iloc[-1]:
@@ -368,8 +370,30 @@ st.write(
     f"Total Products Analyzed: {len(df)}"
 )
 
+st.subheader("PDF Report Export")
+
+if st.button("Generate PDF Report"):
+
+    pdf_file = generate_pdf_report(
+        total_revenue,
+        total_profit,
+        profit_margin,
+        best_product,
+        score
+    )
+
+    with open(pdf_file, "rb") as file:
+
+        st.download_button(
+            label="Download PDF Report",
+            data=file,
+            file_name="DataNova_Report.pdf",
+            mime="application/pdf"
+        )
+
+
 st.markdown("---")
 
 st.caption(
-    "DataNova v3.5 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v3.7 | Built with Python, Pandas, Plotly and Streamlit"
 )
