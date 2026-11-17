@@ -207,8 +207,9 @@ st.write(
 )
 
 st.write(
-    f"2. The business generated {total_revenue} revenue."
+    f"2. The selected product generated {selected_revenue} revenue."
 )
+
 
 st.write(
     f"3. Dataset contains {missing_values} missing values."
