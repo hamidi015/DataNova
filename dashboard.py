@@ -319,6 +319,16 @@ st.plotly_chart(
     trend_fig,
     key="revenue_trend_chart"
 )
+st.subheader("Revenue Trend Insight")
+
+if df["Revenue"].iloc[0] > df["Revenue"].iloc[-1]:
+    st.warning(
+        "Revenue trend is decreasing."
+    )
+else:
+    st.success(
+        "Revenue trend is increasing."
+    )
 
 # Product Summary
 st.subheader("Product Summary")
