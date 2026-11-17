@@ -304,6 +304,23 @@ st.write(
     f"{best_product} contributes {top_share:.2f}% of total revenue."
 )
 
+# Revenue Trend Analysis
+st.subheader("Revenue Trend Analysis")
+
+trend_fig = px.line(
+    df,
+    x="Product",
+    y="Revenue",
+    markers=True,
+    title="Revenue Trend"
+)
+
+st.plotly_chart(
+    trend_fig,
+    key="revenue_trend_chart"
+)
+
+# Product Summary
 st.subheader("Product Summary")
 
 st.write(
@@ -313,5 +330,5 @@ st.write(
 st.markdown("---")
 
 st.caption(
-    "DataNova v3.0 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v3.1 | Built with Python, Pandas, Plotly and Streamlit"
 )
