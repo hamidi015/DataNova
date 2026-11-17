@@ -110,7 +110,7 @@ Selected revenue is {selected_revenue}.
 
 Selected profit is {selected_profit}.
 
-The best performing product is {best_product}.
+Selected product is {selected_product}.
 
 Profit margin is {profit_margin:.2f}%.
 """
