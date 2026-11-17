@@ -50,6 +50,7 @@ st.success(
     f"Loaded file: {uploaded_file.name}"
 )
 
+
 product_options = ["All Products"] + list(df["Product"])
 
 selected_product = st.selectbox(
@@ -292,6 +293,34 @@ if profit_margin < 20:
 
 st.success(f"Business Health Score: {score}/100")
 
+st.subheader("📋 Executive Summary")
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric(
+        "Revenue",
+        total_revenue
+    )
+
+with col2:
+    st.metric(
+        "Profit",
+        total_profit
+    )
+
+with col3:
+    st.metric(
+        "Best Product",
+        best_product
+    )
+
+with col4:
+    st.metric(
+        "Health Score",
+        score
+    )
+
 if score >= 80:
     st.success("Business health is excellent.")
 elif score >= 60:
@@ -458,5 +487,5 @@ if st.button("Generate PDF Report"):
 st.markdown("---")
 
 st.caption(
-    "DataNova v4.2 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v4.4 | Built with Python, Pandas, Plotly and Streamlit"
 )
