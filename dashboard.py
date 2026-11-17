@@ -97,17 +97,19 @@ with col3:
 
 
 
-st.subheader("Revenue by Product")
+col1, col2 = st.columns(2)
 
-st.bar_chart(
-    df.set_index("Product")["Revenue"]
-)
+with col1:
+    st.subheader("Revenue by Product")
+    st.bar_chart(
+        df.set_index("Product")["Revenue"]
+    )
 
-st.subheader("Revenue Table")
-
-st.dataframe(
-    df[["Product", "Revenue"]]
-)
+with col2:
+    st.subheader("Revenue Table")
+    st.dataframe(
+        df[["Product", "Revenue"]]
+    )
 
 st.subheader("Profit by Product")
 
@@ -270,5 +272,5 @@ st.write(
 st.markdown("---")
 
 st.caption(
-    "DataNova v2.2 | Built with Python, Pandas and Streamlit"
+    "DataNova v2.5 | Built with Python, Pandas and Streamlit"
 )
