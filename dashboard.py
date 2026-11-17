@@ -1,3 +1,4 @@
+import plotly.express as px
 import streamlit as st
 import pandas as pd
 
@@ -101,9 +102,16 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.subheader("Revenue by Product")
-    st.bar_chart(
-        df.set_index("Product")["Revenue"]
+
+    fig = px.bar(
+        df,
+        x="Product",
+        y="Revenue",
+        color="Product",
+        title="Revenue by Product"
     )
+
+    st.plotly_chart(fig)
 
 with col2:
     st.subheader("Revenue Table")
@@ -113,9 +121,15 @@ with col2:
 
 st.subheader("Profit by Product")
 
-st.bar_chart(
-    df.set_index("Product")["Profit"]
+profit_fig = px.bar(
+    df,
+    x="Product",
+    y="Profit",
+    color="Product",
+    title="Profit by Product"
 )
+
+st.plotly_chart(profit_fig)
 
 best_product = df.loc[
     df["Revenue"].idxmax(),
@@ -272,5 +286,5 @@ st.write(
 st.markdown("---")
 
 st.caption(
-    "DataNova v2.5 | Built with Python, Pandas and Streamlit"
+    "DataNova v3.0 | Built with Python, Pandas, Plotly and Streamlit"
 )
