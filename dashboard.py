@@ -34,6 +34,10 @@ selected_product = st.selectbox(
     df["Product"]
 )
 
+st.info(
+    f"Currently analyzing: {selected_product}"
+)
+
 filtered_df = df[
     df["Product"] == selected_product
 ]
