@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 
 uploaded_file = st.file_uploader(
-    "Upload a CSV file",
-    type=["csv"]
+    "Upload a CSV or Excel file",
+    type=["csv", "xlsx"]
 )
 
 st.title("🚀 DataNova Dashboard")
@@ -20,7 +20,14 @@ if uploaded_file is None:
     st.info("Please upload a CSV file.")
     st.stop()
 
-df = pd.read_csv(uploaded_file)
+if uploaded_file.name.endswith(".csv"):
+    df = pd.read_csv(uploaded_file)
+else:
+    df = pd.read_excel(uploaded_file)
+
+st.success(
+    f"Loaded file: {uploaded_file.name}"
+)
 
 selected_product = st.selectbox(
     "Choose a Product",
@@ -40,8 +47,6 @@ st.subheader("Selected Product")
 st.write(
     f"You selected: {selected_product}"
 )
-
-st.dataframe (filtered_df)
 
 st.subheader("Sales Data")
 
@@ -237,5 +242,5 @@ st.write(
 st.markdown("---")
 
 st.caption(
-    "DataNova v1.8 | Built with Python, Pandas and Streamlit"
+    "DataNova v2.2 | Built with Python, Pandas and Streamlit"
 )
