@@ -11,6 +11,14 @@ st.title("🚀 DataNova Dashboard")
 
 st.markdown(
     """
+    ### Interactive Business Analytics Dashboard
+
+    Built with Python, Pandas, Plotly and Streamlit.
+    """
+)
+
+st.markdown(
+    """
     Welcome to DataNova.
 
     Upload, analyze, and visualize business data in real time.
