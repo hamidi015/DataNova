@@ -57,6 +57,10 @@ selected_product = st.selectbox(
     product_options
 )
 
+search_term = st.text_input(
+    "Search Product"
+)
+
 st.info(
     f"Currently analyzing: {selected_product}"
 )
@@ -66,6 +70,15 @@ if selected_product == "All Products":
 else:
     filtered_df = df[
         df["Product"] == selected_product
+    ]
+
+if search_term:
+    filtered_df = filtered_df[
+        filtered_df["Product"]
+        .str.contains(
+            search_term,
+            case=False
+        )
     ]
 
 selected_revenue = filtered_df["Revenue"].sum()
@@ -238,6 +251,8 @@ st.info(
 )
 
 st.subheader("Profit Statistics")
+
+st.header("🤖 AI & Business Insights")
 
 st.subheader("Business Health Score")
 
@@ -423,5 +438,5 @@ if st.button("Generate PDF Report"):
 st.markdown("---")
 
 st.caption(
-    "DataNova v3.8 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v4.1 | Built with Python, Pandas, Plotly and Streamlit"
 )
