@@ -178,6 +178,26 @@ profit_fig = px.bar(
 
 st.plotly_chart(profit_fig)
 
+st.subheader("Revenue vs Profit Comparison")
+
+comparison_df = df[
+    ["Product", "Revenue", "Profit"]
+]
+
+comparison_fig = px.bar(
+    comparison_df,
+    x="Product",
+    y=["Revenue", "Profit"],
+    barmode="group",
+    title="Revenue vs Profit"
+)
+
+st.plotly_chart(
+    comparison_fig,
+    key="comparison_chart"
+)
+
+
 best_product = df.loc[
     df["Revenue"].idxmax(),
     "Product"
@@ -438,5 +458,5 @@ if st.button("Generate PDF Report"):
 st.markdown("---")
 
 st.caption(
-    "DataNova v4.1 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v4.2 | Built with Python, Pandas, Plotly and Streamlit"
 )
