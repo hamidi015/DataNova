@@ -29,18 +29,23 @@ st.success(
     f"Loaded file: {uploaded_file.name}"
 )
 
+product_options = ["All Products"] + list(df["Product"])
+
 selected_product = st.selectbox(
     "Choose a Product",
-    df["Product"]
+    product_options
 )
 
 st.info(
     f"Currently analyzing: {selected_product}"
 )
 
-filtered_df = df[
-    df["Product"] == selected_product
-]
+if selected_product == "All Products":
+    filtered_df = df
+else:
+    filtered_df = df[
+        df["Product"] == selected_product
+    ]
 
 selected_revenue = filtered_df["Revenue"].sum()
 
