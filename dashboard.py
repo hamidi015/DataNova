@@ -31,8 +31,19 @@ if uploaded_file is None:
 
 if uploaded_file.name.endswith(".csv"):
     df = pd.read_csv(uploaded_file)
+
 else:
-    df = pd.read_excel(uploaded_file)
+    excel_file = pd.ExcelFile(uploaded_file)
+
+    selected_sheet = st.selectbox(
+        "Select Excel Sheet",
+        excel_file.sheet_names
+    )
+
+    df = pd.read_excel(
+        uploaded_file,
+        sheet_name=selected_sheet
+    )
 
 st.success(
     f"Loaded file: {uploaded_file.name}"
@@ -94,7 +105,7 @@ profit_margin = (
     selected_profit / selected_revenue
 ) * 100
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.metric(
@@ -114,7 +125,11 @@ with col3:
         f"{profit_margin:.2f}%"
     )
 
-
+with col4:
+    st.metric(
+        "Products",
+        len(df)
+    )
 
 col1, col2 = st.columns(2)
 
@@ -356,5 +371,5 @@ st.write(
 st.markdown("---")
 
 st.caption(
-    "DataNova v3.3 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v3.5 | Built with Python, Pandas, Plotly and Streamlit"
 )
