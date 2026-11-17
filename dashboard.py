@@ -340,5 +340,5 @@ st.write(
 st.markdown("---")
 
 st.caption(
-    "DataNova v3.1 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v3.2 | Built with Python, Pandas, Plotly and Streamlit"
 )
