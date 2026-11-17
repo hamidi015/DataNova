@@ -62,6 +62,15 @@ st.subheader("Sales Data")
 
 st.dataframe(filtered_df)
 
+csv = filtered_df.to_csv(index=False)
+
+st.download_button(
+    label="Download Filtered Data",
+    data=csv,
+    file_name="filtered_data.csv",
+    mime="text/csv"
+)
+
 
 st.subheader("Dataset Preview")
 
@@ -264,7 +273,16 @@ st.write(
     f"3. Dataset contains {missing_values} missing values."
 )
 
+st.subheader("Revenue Share by Product")
 
+pie_fig = px.pie(
+    df,
+    values="Revenue",
+    names="Product",
+    title="Revenue Share by Product"
+)
+
+st.plotly_chart(pie_fig)
 
 st.subheader("Top Product Share")
 
