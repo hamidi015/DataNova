@@ -67,7 +67,7 @@ csv = filtered_df.to_csv(index=False)
 st.download_button(
     label="Download Filtered Data",
     data=csv,
-    file_name="filtered_data.csv",
+    file_name=f"{selected_product}_data.csv"
     mime="text/csv"
 )
 
