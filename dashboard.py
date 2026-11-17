@@ -71,22 +71,31 @@ st.dataframe(df.head())
 total_revenue = df["Revenue"].sum()
 total_profit = df["Profit"].sum()
 
-col1, col2 = st.columns(2)
-
-with col1:
-    st.metric("Selected Revenue", selected_revenue)
-
-with col2:
-    st.metric("Selected Profit", selected_profit)
-
 profit_margin = (
     selected_profit / selected_revenue
 ) * 100
 
-st.metric(
-    "Profit Margin %",
-    f"{profit_margin:.2f}%"
-)
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric(
+        "Selected Revenue",
+        selected_revenue
+    )
+
+with col2:
+    st.metric(
+        "Selected Profit",
+        selected_profit
+    )
+
+with col3:
+    st.metric(
+        "Profit Margin %",
+        f"{profit_margin:.2f}%"
+    )
+
+
 
 st.subheader("Revenue by Product")
 
@@ -130,6 +139,16 @@ Profit margin is {profit_margin:.2f}%.
 """
 
 st.write(summary)
+
+st.subheader("Dataset Information")
+
+st.info(
+    f"Dataset contains {len(df)} records and {df.shape[1]} columns."
+)
+
+st.success(
+    f"Total Records: {len(df)} | Total Columns: {df.shape[1]}"
+)
 
 st.subheader("Dataset Insights")
 
