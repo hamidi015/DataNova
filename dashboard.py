@@ -116,6 +116,14 @@ st.dataframe(df.head())
 total_revenue = df["Revenue"].sum()
 total_profit = df["Profit"].sum()
 
+predicted_revenue = total_revenue * 1.10
+
+growth_rate = (
+    (predicted_revenue - total_revenue)
+    / total_revenue
+) * 100
+
+
 profit_margin = (
     selected_profit / selected_revenue
 ) * 100
@@ -427,6 +435,18 @@ else:
         "Revenue trend is increasing."
     )
 
+st.subheader("Revenue Forecast")
+
+st.info(
+    f"""
+Current Revenue: {total_revenue}
+
+Predicted Revenue: {predicted_revenue:.0f}
+
+Expected Growth: {growth_rate:.2f}%
+"""
+)
+
 # Product Summary
 st.subheader("Product Summary")
 
@@ -487,5 +507,5 @@ if st.button("Generate PDF Report"):
 st.markdown("---")
 
 st.caption(
-    "DataNova v4.4 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v5.0 | Built with Python, Pandas, Plotly and Streamlit"
 )
