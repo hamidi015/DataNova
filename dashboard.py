@@ -230,7 +230,23 @@ score = 100
 if missing_values > 0:
     score -= 20
 
+if total_profit < 500:
+    score -= 20
+
+if total_revenue < 2000:
+    score -= 20
+
+if profit_margin < 20:
+    score -= 20
+
 st.success(f"Business Health Score: {score}/100")
+
+if score >= 80:
+    st.success("Business health is excellent.")
+elif score >= 60:
+    st.warning("Business health is good.")
+else:
+    st.error("Business health needs improvement.")
 
 st.write(f"Maximum Profit: {df['Profit'].max()}")
 
@@ -340,5 +356,5 @@ st.write(
 st.markdown("---")
 
 st.caption(
-    "DataNova v3.2 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v3.3 | Built with Python, Pandas, Plotly and Streamlit"
 )
