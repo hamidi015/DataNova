@@ -1,6 +1,10 @@
 import plotly.express as px
 import streamlit as st
 import pandas as pd
+import numpy as np
+
+from sklearn.linear_model import LinearRegression
+
 from modules.pdf_report import generate_pdf_report
 
 uploaded_file = st.file_uploader(
