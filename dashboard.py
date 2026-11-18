@@ -131,6 +131,13 @@ next_month = np.array([[13]])
 
 ml_prediction = model.predict(next_month)[0]
 
+forecast_df = history_df.copy()
+
+forecast_df.loc[len(forecast_df)] = [
+    13,
+    ml_prediction
+]
+
 total_profit = df["Profit"].sum()
 
 predicted_revenue = total_revenue * 1.10
@@ -464,13 +471,24 @@ Expected Growth: {growth_rate:.2f}%
 """
 )
 
-st.subheader("Machine Learning Forecast")
+st.subheader("🤖 Machine Learning Forecast")
 
-st.success(
-    f"""
-Predicted Revenue for Month 13: {ml_prediction:.0f}
-"""
+st.metric(
+    "Predicted Revenue (Month 13)",
+    f"{ml_prediction:.0f}"
 )
+
+st.subheader("📈 Machine Learning Forecast Chart")
+
+forecast_fig = px.line(
+    forecast_df,
+    x="Month",
+    y="Revenue",
+    markers=True,
+    title="Revenue Forecast with Machine Learning"
+)
+
+st.plotly_chart(forecast_fig)
 
 # Product Summary
 st.subheader("Product Summary")
@@ -532,5 +550,5 @@ if st.button("Generate PDF Report"):
 st.markdown("---")
 
 st.caption(
-    "DataNova v6.0 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
+    "DataNova v6.1 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
 )
