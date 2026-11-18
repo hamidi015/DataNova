@@ -80,9 +80,11 @@ else:
         sheet_name=selected_sheet
     )
 
-st.success(
-    f"Loaded file: {uploaded_file.name}"
-)
+if page == "📊 Dashboard":
+
+    st.success(
+        f"Loaded file: {uploaded_file.name}"
+    )
 
 
 product_options = ["All Products"] + list(df["Product"])
@@ -96,9 +98,10 @@ search_term = st.text_input(
     "Search Product"
 )
 
-st.info(
-    f"Currently analyzing: {selected_product}"
-)
+if page == "📊 Dashboard":
+    st.info(
+        f"Currently analyzing: {selected_product}"
+    )
 
 if selected_product == "All Products":
     filtered_df = df
@@ -120,15 +123,21 @@ selected_revenue = filtered_df["Revenue"].sum()
 
 selected_profit = filtered_df["Profit"].sum()
 
-st.subheader("Selected Product")
+if page == "📊 Dashboard":
 
-st.write(
-    f"You selected: {selected_product}"
-)
+    st.subheader("Selected Product")
 
-st.subheader("Sales Data")
+    st.write(
+        f"You selected: {selected_product}"
+    )
 
-st.dataframe(filtered_df)
+
+if page == "📊 Dashboard":
+
+    st.subheader("Sales Data")
+
+    st.dataframe(filtered_df)
+
 
 csv = filtered_df.to_csv(index=False)
 
@@ -141,9 +150,11 @@ st.download_button(
 
 
 
-st.subheader("Dataset Preview")
+if page == "📊 Dashboard":
 
-st.dataframe(df.head())
+    st.subheader("Dataset Preview")
+
+    st.dataframe(df.head())
 
 
 
@@ -326,19 +337,19 @@ if missing_values == 0:
 else:
     st.warning("Data Quality Score: Needs Review")
 
-st.subheader("Revenue Statistics")
+if page == "📊 Dashboard":
 
-st.write(f"Maximum Revenue: {df['Revenue'].max()}")
+    st.subheader("Revenue Statistics")
 
-st.write(f"Minimum Revenue: {df['Revenue'].min()}")
+    st.write(f"Maximum Revenue: {df['Revenue'].max()}")
 
-st.write(f"Average Revenue: {df['Revenue'].mean():.2f}")
+    st.write(f"Minimum Revenue: {df['Revenue'].min()}")
 
-st.subheader("Business Recommendation")
+    st.write(f"Average Revenue: {df['Revenue'].mean():.2f}")
 
-st.info(
-    f"Recommendation: Focus on {best_product} because it generates the highest revenue."
-)
+
+
+
 
 st.subheader("Profit Statistics")
 
@@ -496,19 +507,21 @@ else:
         "Revenue trend is increasing."
     )
 
-st.subheader("Revenue Forecast")
 
-st.info(
-    f"""
+
+if page == "🤖 Machine Learning":
+
+    st.subheader("Revenue Forecast")
+
+    st.info(
+        f"""
 Current Revenue: {total_revenue}
 
 Predicted Revenue: {predicted_revenue:.0f}
 
 Expected Growth: {growth_rate:.2f}%
 """
-)
-
-if page == "🤖 Machine Learning":
+    )
 
     st.subheader("🤖 Machine Learning Forecast")
 
@@ -535,11 +548,13 @@ if page == "🤖 Machine Learning":
     st.plotly_chart(forecast_fig)
 
 # Product Summary
-st.subheader("Product Summary")
+if page == "📊 Dashboard":
 
-st.write(
-    f"Total Products Analyzed: {len(df)}"
-)
+    st.subheader("Product Summary")
+
+    st.write(
+        f"Total Products Analyzed: {len(df)}"
+    )
 
 st.subheader("PDF Report Export")
 
