@@ -652,6 +652,7 @@ if growth_rate > 5:
     st.success(
         "AI Recommendation: Business growth is positive. Consider increasing inventory and marketing investment."
     )
+
 else:
     st.warning(
         "AI Recommendation: Growth is limited. Review pricing and sales strategy."
@@ -665,6 +666,32 @@ else:
     st.success(
         f"Random Forest predicts higher revenue: {rf_prediction:.0f}"
     )
+
+prediction_df = pd.DataFrame({
+    "Model": [
+        "Linear Regression",
+        "Random Forest"
+    ],
+    "Prediction": [
+        ml_prediction,
+        rf_prediction
+    ]
+})
+
+st.subheader("📊 Prediction Table")
+
+st.dataframe(prediction_df)
+
+csv_predictions = prediction_df.to_csv(
+    index=False
+)
+
+st.download_button(
+    label="📥 Download ML Predictions",
+    data=csv_predictions,
+    file_name="ml_predictions.csv",
+    mime="text/csv"
+)
 
 st.subheader("📈 Machine Learning Forecast Chart")
 
