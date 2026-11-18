@@ -356,9 +356,11 @@ if page == "📊 Dashboard":
     st.subheader("Profit Statistics")
 
 
-st.header("🤖 AI & Business Insights")
+if page == "📊 Dashboard":
 
-st.subheader("Business Health Score")
+    st.header("🤖 AI & Business Insights")
+
+    st.subheader("Business Health Score")
 
 score = 100
 
@@ -374,48 +376,50 @@ if total_revenue < 2000:
 if profit_margin < 20:
     score -= 20
 
-st.success(f"Business Health Score: {score}/100")
+if page == "📊 Dashboard":
 
-st.subheader("📋 Executive Summary")
+    st.success(f"Business Health Score: {score}/100")
 
-col1, col2, col3, col4 = st.columns(4)
+if page == "📊 Dashboard":
 
-with col1:
-    st.metric(
-        "Revenue",
-        total_revenue
-    )
+    st.subheader("📋 Executive Summary")
 
-with col2:
-    st.metric(
-        "Profit",
-        total_profit
-    )
+    col1, col2, col3, col4 = st.columns(4)
 
-with col3:
-    st.metric(
-        "Best Product",
-        best_product
-    )
+    with col1:
+        st.metric(
+            "Revenue",
+            total_revenue
+        )
 
-with col4:
-    st.metric(
-        "Health Score",
-        score
-    )
+    with col2:
+        st.metric(
+            "Profit",
+            total_profit
+        )
 
-if score >= 80:
-    st.success("Business health is excellent.")
-elif score >= 60:
-    st.warning("Business health is good.")
-else:
-    st.error("Business health needs improvement.")
+    with col3:
+        st.metric(
+            "Best Product",
+            best_product
+        )
 
-st.write(f"Maximum Profit: {df['Profit'].max()}")
+    with col4:
+        st.metric(
+            "Health Score",
+            score
+        )
 
-st.write(f"Minimum Profit: {df['Profit'].min()}")
+if page == "📊 Dashboard":
 
-st.write(f"Average Profit: {df['Profit'].mean():.2f}")
+    if score >= 80:
+        st.success("Business health is excellent.")
+    elif score >= 60:
+        st.warning("Business health is good.")
+    else:
+        st.error("Business health needs improvement.")
+
+
 
 st.subheader("Project Status")
 
@@ -552,6 +556,13 @@ Expected Growth: {growth_rate:.2f}%
 
 # Product Summary
 if page == "📊 Dashboard":
+
+    st.write(f"Maximum Profit: {df['Profit'].max()}")
+
+    st.write(f"Minimum Profit: {df['Profit'].min()}")
+
+    st.write(f"Average Profit: {df['Profit'].mean():.2f}")
+
 
     st.subheader("Product Summary")
 
