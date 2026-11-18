@@ -421,49 +421,58 @@ if page == "📊 Dashboard":
 
 
 
-st.subheader("Project Status")
+if page == "📊 Dashboard":
 
-st.success("✅ DataNova v7.0 Successfully Running")
+    st.subheader("Project Status")
 
-st.subheader("Smart Business Insight")
+    st.success("✅ DataNova v7.0 Successfully Running")
 
-if total_profit > 500:
-    st.success("Business is performing well. Profit is above 500.")
-else:
-    st.warning("Business profit needs improvement.")
+if page == "📊 Dashboard":
+
+    st.subheader("Smart Business Insight")
+
+    if total_profit > 500:
+        st.success("Business is performing well. Profit is above 500.")
+    else:
+        st.warning("Business profit needs improvement.")
     
-st.subheader("Revenue Rating")
+if page == "📊 Dashboard":
 
-if total_revenue >= 2000:
-    st.success("Excellent Revenue Performance")
-else:
-    st.warning("Revenue Performance Needs Improvement")
+    st.subheader("Revenue Rating")
 
-st.subheader("Product Ranking")
+    if total_revenue >= 2000:
+        st.success("Excellent Revenue Performance")
+    else:
+        st.warning("Revenue Performance Needs Improvement")
 
-ranking = df.sort_values(
-    by="Revenue",
-    ascending=False
-)
+if page == "📊 Dashboard":
 
-st.dataframe(
-    ranking[["Product", "Revenue"]]
-)
+    st.subheader("Product Ranking")
 
-st.subheader("Top 3 Business Insights")
+    ranking = df.sort_values(
+        by="Revenue",
+        ascending=False
+    )
 
-st.write(
-    f"1. {best_product} is the best performing product."
-)
+    st.dataframe(
+        ranking[["Product", "Revenue"]]
+    )
 
-st.write(
-    f"2. The selected product generated {selected_revenue} revenue."
-)
+if page == "📊 Dashboard":
 
+    st.subheader("Top 3 Business Insights")
 
-st.write(
-    f"3. Dataset contains {missing_values} missing values."
-)
+    st.write(
+        f"1. {best_product} is the best performing product."
+    )
+
+    st.write(
+        f"2. The selected product generated {selected_revenue} revenue."
+    )
+
+    st.write(
+        f"3. Dataset contains {missing_values} missing values."
+    )
 
 if page == "📊 Dashboard":
 
