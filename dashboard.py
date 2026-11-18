@@ -190,6 +190,14 @@ accuracy = r2_score(
     predictions
 )
 
+rf_predictions = rf_model.predict(X)
+
+rf_accuracy = r2_score(
+    y,
+    rf_predictions
+)
+
+
 forecast_df = history_df.copy()
 
 forecast_df.loc[len(forecast_df)] = [
@@ -544,23 +552,45 @@ if page == "📊 Dashboard":
 if page == "🤖 Machine Learning":
 
     st.title("🤖 Machine Learning Forecast Center")
+    
+    st.caption("DataNova v7.2 | Multi-Model Forecasting System")
 
 
     st.info(
         "This page uses Machine Learning to forecast future business revenue."
     )
 
-    st.subheader("Revenue Forecast")
+st.subheader("Revenue Forecast")
 
-    st.info(
-        f"""
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric(
+        "Current Revenue",
+        f"{total_revenue:.0f}"
+    )
+
+with col2:
+    st.metric(
+        "Forecast Revenue",
+        f"{ml_prediction:.0f}"
+    )
+
+with col3:
+    st.metric(
+        "Expected Growth %",
+        f"{growth_rate:.2f}%"
+    )
+
+st.info(
+    f"""
 Current Revenue: {total_revenue}
 
-Predicted Revenue: {predicted_revenue:.0f}
+Predicted Revenue: {ml_prediction:.0f}
 
 Expected Growth: {growth_rate:.2f}%
 """
-    )
+)
 
 st.subheader("🤖 Machine Learning Forecast")
 
@@ -579,11 +609,42 @@ with col2:
     )
 
 st.metric(
-    "Model Accuracy (R²)",
-    f"{accuracy:.2f}"
+    "AI Confidence Score",
+    f"{accuracy * 100:.0f}%"
 )
 
+if accuracy >= 0.90:
+    st.success("Confidence Level: Very High")
+elif accuracy >= 0.75:
+    st.info("Confidence Level: High")
+else:
+    st.warning("Confidence Level: Moderate")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.metric(
+        "Linear Regression Accuracy",
+        f"{accuracy:.2f}"
+    )
+
+with col2:
+    st.metric(
+        "Random Forest Accuracy",
+        f"{rf_accuracy:.2f}"
+    )
+
+
 st.subheader("🏆 Model Comparison")
+
+if accuracy >= rf_accuracy:
+    st.success(
+        f"Best Model: Linear Regression (Accuracy: {accuracy:.2f})"
+    )
+else:
+    st.success(
+        f"Best Model: Random Forest (Accuracy: {rf_accuracy:.2f})"
+    )
 
 st.subheader("🤖 AI Recommendation")
 
