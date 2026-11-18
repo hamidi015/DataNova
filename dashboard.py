@@ -465,54 +465,59 @@ st.write(
     f"3. Dataset contains {missing_values} missing values."
 )
 
-st.subheader("Revenue Share by Product")
+if page == "📊 Dashboard":
 
-pie_fig = px.pie(
-    df,
-    values="Revenue",
-    names="Product",
-    title="Revenue Share by Product"
-)
+    st.subheader("Revenue Share by Product")
 
-st.plotly_chart(pie_fig)
-
-st.subheader("Top Product Share")
-
-top_share = (
-    df["Revenue"].max()
-    / total_revenue
-) * 100
-
-st.write(
-    f"{best_product} contributes {top_share:.2f}% of total revenue."
-)
-
-# Revenue Trend Analysis
-st.subheader("Revenue Trend Analysis")
-
-trend_fig = px.line(
-    df,
-    x="Product",
-    y="Revenue",
-    markers=True,
-    title="Revenue Trend"
-)
-
-st.plotly_chart(
-    trend_fig,
-    key="revenue_trend_chart"
-)
-
-st.subheader("Revenue Trend Insight")
-
-if df["Revenue"].iloc[0] > df["Revenue"].iloc[-1]:
-    st.warning(
-        "Revenue trend is decreasing."
+    pie_fig = px.pie(
+        df,
+        values="Revenue",
+        names="Product",
+        title="Revenue Share by Product"
     )
-else:
-    st.success(
-        "Revenue trend is increasing."
+
+    st.plotly_chart(pie_fig)
+
+if page == "📊 Dashboard":
+
+    st.subheader("Revenue Trend Insight")
+
+    if df["Revenue"].iloc[0] > df["Revenue"].iloc[-1]:
+        st.warning(
+            "Revenue trend is decreasing."
+        )
+    else:
+        st.success(
+            "Revenue trend is increasing."
+        )
+
+    st.subheader("Revenue Trend Analysis")
+
+    trend_fig = px.line(
+        df,
+        x="Product",
+        y="Revenue",
+        markers=True,
+        title="Revenue Trend"
     )
+
+    st.plotly_chart(
+        trend_fig,
+        key="revenue_trend_chart"
+    )
+
+
+    st.subheader("Top Product Share")
+
+    top_share = (
+        df["Revenue"].max()
+        / total_revenue
+    ) * 100
+
+    st.write(
+        f"{best_product} contributes {top_share:.2f}% of total revenue."
+    )
+
 
 
 
