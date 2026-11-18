@@ -488,7 +488,7 @@ Expected Growth: {growth_rate:.2f}%
 )
 
 st.subheader("🤖 Machine Learning Forecast")
-
+    
 st.metric(
     "Predicted Revenue (Month 13)",
     f"{ml_prediction:.0f}"
