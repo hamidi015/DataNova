@@ -13,15 +13,35 @@ uploaded_file = st.file_uploader(
     type=["csv", "xlsx"]
 )
 
-st.title("🚀 DataNova Dashboard")
+st.title("🚀 DataNova v7.0 Dashboard")
+
+st.caption("AI-Powered Business Analytics Dashboard")
 
 page = st.sidebar.radio(
-    "Navigation",
+    "📂 Navigation",
     [
-        "Dashboard",
-        "Machine Learning"
+        "📊 Dashboard",
+        "🤖 Machine Learning"
     ]
 )
+
+st.sidebar.markdown("---")
+
+st.sidebar.success("🚀 DataNova v7.0")
+
+st.sidebar.markdown("---")
+
+st.sidebar.write("Features")
+
+st.sidebar.write("✅ Analytics")
+st.sidebar.write("✅ Machine Learning")
+st.sidebar.write("✅ PDF Reports")
+
+if page == "Dashboard":
+    st.sidebar.success("📊 Dashboard")
+
+if page == "Machine Learning":
+    st.sidebar.success("🤖 Machine Learning")
 
 st.markdown(
     """
@@ -384,7 +404,7 @@ st.write(f"Average Profit: {df['Profit'].mean():.2f}")
 
 st.subheader("Project Status")
 
-st.success("✅ DataNova v1.0 Successfully Running")
+st.success("✅ DataNova v7.0 Successfully Running")
 
 st.subheader("Smart Business Insight")
 
@@ -487,7 +507,10 @@ Expected Growth: {growth_rate:.2f}%
 """
 )
 
-st.subheader("🤖 Machine Learning Forecast")
+if page == "🤖 Machine Learning":
+
+    st.subheader("🤖 Machine Learning Forecast")
+
     
 st.metric(
     "Predicted Revenue (Month 13)",
@@ -571,5 +594,5 @@ if st.button("Generate PDF Report"):
 st.markdown("---")
 
 st.caption(
-    "DataNova v6.2 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
+    "DataNova v7.0 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
 )
