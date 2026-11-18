@@ -118,6 +118,19 @@ st.dataframe(df.head())
 
 
 total_revenue = df["Revenue"].sum()
+
+history_df = pd.read_csv("data/sales_history.csv")
+
+X = history_df[["Month"]]
+y = history_df["Revenue"]
+
+model = LinearRegression()
+model.fit(X, y)
+
+next_month = np.array([[13]])
+
+ml_prediction = model.predict(next_month)[0]
+
 total_profit = df["Profit"].sum()
 
 predicted_revenue = total_revenue * 1.10
@@ -451,6 +464,14 @@ Expected Growth: {growth_rate:.2f}%
 """
 )
 
+st.subheader("Machine Learning Forecast")
+
+st.success(
+    f"""
+Predicted Revenue for Month 13: {ml_prediction:.0f}
+"""
+)
+
 # Product Summary
 st.subheader("Product Summary")
 
@@ -511,5 +532,5 @@ if st.button("Generate PDF Report"):
 st.markdown("---")
 
 st.caption(
-    "DataNova v5.0 | Built with Python, Pandas, Plotly and Streamlit"
+    "DataNova v6.0 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
 )

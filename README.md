@@ -58,7 +58,7 @@ Revenue Forecasting & AI Business Advisor
 - ReportLab
 - Git
 - GitHub
-
+- Scikit-Learn
 ## Use Cases
 
 - Business Performance Monitoring
@@ -75,3 +75,5 @@ Revenue Forecasting & AI Business Advisor
 - Advanced Filtering
 - Enhanced Dashboard Design
 - AI Analytics Assistant
+- Machine Learning Forecasting
+- Linear Regression Model
