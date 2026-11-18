@@ -532,6 +532,13 @@ if page == "📊 Dashboard":
 
 if page == "🤖 Machine Learning":
 
+    st.title("🤖 Machine Learning Forecast Center")
+
+
+    st.info(
+        "This page uses Machine Learning to forecast future business revenue."
+    )
+
     st.subheader("Revenue Forecast")
 
     st.info(
