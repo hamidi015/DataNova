@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
 
 from modules.pdf_report import generate_pdf_report
 
@@ -130,6 +131,13 @@ model.fit(X, y)
 next_month = np.array([[13]])
 
 ml_prediction = model.predict(next_month)[0]
+
+predictions = model.predict(X)
+
+accuracy = r2_score(
+    y,
+    predictions
+)
 
 forecast_df = history_df.copy()
 
@@ -476,6 +484,11 @@ st.subheader("🤖 Machine Learning Forecast")
 st.metric(
     "Predicted Revenue (Month 13)",
     f"{ml_prediction:.0f}"
+)
+
+st.metric(
+    "Model Accuracy (R²)",
+    f"{accuracy:.2f}"
 )
 
 st.subheader("📈 Machine Learning Forecast Chart")
