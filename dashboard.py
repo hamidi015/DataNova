@@ -5,6 +5,7 @@ import numpy as np
 
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
+from sklearn.ensemble import RandomForestRegressor
 
 from modules.pdf_report import generate_pdf_report
 
@@ -168,9 +169,19 @@ y = history_df["Revenue"]
 model = LinearRegression()
 model.fit(X, y)
 
+rf_model = RandomForestRegressor(
+    n_estimators=100,
+    random_state=42
+)
+
+rf_model.fit(X, y)
+
 next_month = np.array([[13]])
 
 ml_prediction = model.predict(next_month)[0]
+
+rf_prediction = rf_model.predict(next_month)[0]
+
 
 predictions = model.predict(X)
 
@@ -551,29 +562,60 @@ Expected Growth: {growth_rate:.2f}%
 """
     )
 
-    st.subheader("🤖 Machine Learning Forecast")
+st.subheader("🤖 Machine Learning Forecast")
 
+col1, col2 = st.columns(2)
+
+with col1:
     st.metric(
-        "Predicted Revenue (Month 13)",
+        "Linear Regression",
         f"{ml_prediction:.0f}"
     )
 
+with col2:
     st.metric(
-        "Model Accuracy (R²)",
-        f"{accuracy:.2f}"
+        "Random Forest",
+        f"{rf_prediction:.0f}"
     )
 
-    st.subheader("📈 Machine Learning Forecast Chart")
+st.metric(
+    "Model Accuracy (R²)",
+    f"{accuracy:.2f}"
+)
 
-    forecast_fig = px.line(
-        forecast_df,
-        x="Month",
-        y="Revenue",
-        markers=True,
-        title="Revenue Forecast with Machine Learning"
+st.subheader("🏆 Model Comparison")
+
+st.subheader("🤖 AI Recommendation")
+
+if growth_rate > 5:
+    st.success(
+        "AI Recommendation: Business growth is positive. Consider increasing inventory and marketing investment."
+    )
+else:
+    st.warning(
+        "AI Recommendation: Growth is limited. Review pricing and sales strategy."
     )
 
-    st.plotly_chart(forecast_fig)
+if ml_prediction > rf_prediction:
+    st.success(
+        f"Linear Regression predicts higher revenue: {ml_prediction:.0f}"
+    )
+else:
+    st.success(
+        f"Random Forest predicts higher revenue: {rf_prediction:.0f}"
+    )
+
+st.subheader("📈 Machine Learning Forecast Chart")
+
+forecast_fig = px.line(
+    forecast_df,
+    x="Month",
+    y="Revenue",
+    markers=True,
+    title="Revenue Forecast with Machine Learning"
+)
+
+st.plotly_chart(forecast_fig)
 
 # Product Summary
 if page == "📊 Dashboard":
