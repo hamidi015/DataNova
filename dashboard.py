@@ -6,6 +6,8 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
+
 
 from modules.pdf_report import generate_pdf_report
 
@@ -176,11 +178,18 @@ rf_model = RandomForestRegressor(
 
 rf_model.fit(X, y)
 
+dt_model = DecisionTreeRegressor(
+    random_state=42
+)
+
+dt_model.fit(X, y)
+
 next_month = np.array([[13]])
 
 ml_prediction = model.predict(next_month)[0]
 
 rf_prediction = rf_model.predict(next_month)[0]
+dt_prediction = dt_model.predict(next_month)[0]
 
 
 predictions = model.predict(X)
@@ -195,6 +204,13 @@ rf_predictions = rf_model.predict(X)
 rf_accuracy = r2_score(
     y,
     rf_predictions
+)
+
+dt_predictions = dt_model.predict(X)
+
+dt_accuracy = r2_score(
+    y,
+    dt_predictions
 )
 
 
@@ -245,7 +261,6 @@ with col4:
         len(df)
     )
 
-col1, col2 = st.columns(2)
 
 with col1:
     st.subheader("Revenue by Product")
@@ -594,7 +609,7 @@ Expected Growth: {growth_rate:.2f}%
 
 st.subheader("🤖 Machine Learning Forecast")
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     st.metric(
@@ -606,6 +621,12 @@ with col2:
     st.metric(
         "Random Forest",
         f"{rf_prediction:.0f}"
+    )
+
+with col3:
+    st.metric(
+        "Decision Tree",
+        f"{dt_prediction:.0f}"
     )
 
 st.metric(
@@ -620,7 +641,7 @@ elif accuracy >= 0.75:
 else:
     st.warning("Confidence Level: Moderate")
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     st.metric(
@@ -634,16 +655,34 @@ with col2:
         f"{rf_accuracy:.2f}"
     )
 
+with col3:
+    st.metric(
+        "Decision Tree Accuracy",
+        f"{dt_accuracy:.2f}"
+    )
+
 
 st.subheader("🏆 Model Comparison")
 
-if accuracy >= rf_accuracy:
+best_accuracy = max(
+    accuracy,
+    rf_accuracy,
+    dt_accuracy
+)
+
+if best_accuracy == accuracy:
     st.success(
         f"Best Model: Linear Regression (Accuracy: {accuracy:.2f})"
     )
-else:
+
+elif best_accuracy == rf_accuracy:
     st.success(
         f"Best Model: Random Forest (Accuracy: {rf_accuracy:.2f})"
+    )
+
+else:
+    st.success(
+        f"Best Model: Decision Tree (Accuracy: {dt_accuracy:.2f})"
     )
 
 st.subheader("🤖 AI Recommendation")
@@ -670,17 +709,23 @@ else:
 prediction_df = pd.DataFrame({
     "Model": [
         "Linear Regression",
-        "Random Forest"
+        "Random Forest",
+        "Decision Tree"
     ],
     "Prediction": [
         ml_prediction,
-        rf_prediction
+        rf_prediction,
+        dt_prediction
     ]
 })
 
 st.subheader("📊 Prediction Table")
 
 st.dataframe(prediction_df)
+
+st.success(
+    f"Total Models Compared: {len(prediction_df)}"
+)
 
 csv_predictions = prediction_df.to_csv(
     index=False
