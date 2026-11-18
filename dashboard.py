@@ -351,7 +351,10 @@ if page == "📊 Dashboard":
 
 
 
-st.subheader("Profit Statistics")
+if page == "📊 Dashboard":
+
+    st.subheader("Profit Statistics")
+
 
 st.header("🤖 AI & Business Insights")
 
