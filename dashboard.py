@@ -37,11 +37,12 @@ st.sidebar.write("✅ Analytics")
 st.sidebar.write("✅ Machine Learning")
 st.sidebar.write("✅ PDF Reports")
 
-if page == "Dashboard":
+if page == "📊 Dashboard":
     st.sidebar.success("📊 Dashboard")
 
-if page == "Machine Learning":
+if page == "🤖 Machine Learning":
     st.sidebar.success("🤖 Machine Learning")
+
 
 st.markdown(
     """
@@ -511,28 +512,27 @@ if page == "🤖 Machine Learning":
 
     st.subheader("🤖 Machine Learning Forecast")
 
-    
-st.metric(
-    "Predicted Revenue (Month 13)",
-    f"{ml_prediction:.0f}"
-)
+    st.metric(
+        "Predicted Revenue (Month 13)",
+        f"{ml_prediction:.0f}"
+    )
 
-st.metric(
-    "Model Accuracy (R²)",
-    f"{accuracy:.2f}"
-)
+    st.metric(
+        "Model Accuracy (R²)",
+        f"{accuracy:.2f}"
+    )
 
-st.subheader("📈 Machine Learning Forecast Chart")
+    st.subheader("📈 Machine Learning Forecast Chart")
 
-forecast_fig = px.line(
-    forecast_df,
-    x="Month",
-    y="Revenue",
-    markers=True,
-    title="Revenue Forecast with Machine Learning"
-)
+    forecast_fig = px.line(
+        forecast_df,
+        x="Month",
+        y="Revenue",
+        markers=True,
+        title="Revenue Forecast with Machine Learning"
+    )
 
-st.plotly_chart(forecast_fig)
+    st.plotly_chart(forecast_fig)
 
 # Product Summary
 st.subheader("Product Summary")
