@@ -15,6 +15,14 @@ uploaded_file = st.file_uploader(
 
 st.title("🚀 DataNova Dashboard")
 
+page = st.sidebar.radio(
+    "Navigation",
+    [
+        "Dashboard",
+        "Machine Learning"
+    ]
+)
+
 st.markdown(
     """
     ### Interactive Business Analytics Dashboard
@@ -563,5 +571,5 @@ if st.button("Generate PDF Report"):
 st.markdown("---")
 
 st.caption(
-    "DataNova v6.1 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
+    "DataNova v6.2 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
 )
