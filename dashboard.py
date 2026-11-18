@@ -14,7 +14,7 @@ uploaded_file = st.file_uploader(
     type=["csv", "xlsx"]
 )
 
-st.title("🚀 DataNova v7.0 Dashboard")
+st.title("🚀 DataNova v7.2 AI Business Analytics Platform")
 
 st.caption("AI-Powered Business Analytics Dashboard")
 
@@ -28,7 +28,7 @@ page = st.sidebar.radio(
 
 st.sidebar.markdown("---")
 
-st.sidebar.success("🚀 DataNova v7.0")
+st.sidebar.success("🚀 DataNova v7.2")
 
 st.sidebar.markdown("---")
 
