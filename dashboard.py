@@ -24,7 +24,8 @@ page = st.sidebar.radio(
     "📂 Navigation",
     [
         "📊 Dashboard",
-        "🤖 Machine Learning"
+        "🤖 Machine Learning",
+        "📈 Forecast Center"
     ]
 )
 
@@ -46,6 +47,8 @@ if page == "📊 Dashboard":
 if page == "🤖 Machine Learning":
     st.sidebar.success("🤖 Machine Learning")
 
+if page == "📈 Forecast Center":
+    st.sidebar.success("📈 Forecast Center")
 
 st.markdown(
     """
@@ -564,7 +567,7 @@ if page == "📊 Dashboard":
 
 
 
-if page == "🤖 Machine Learning":
+if page == "📈 Forecast Center":
 
     st.title("🤖 Machine Learning Forecast Center")
     
@@ -719,12 +722,23 @@ prediction_df = pd.DataFrame({
     ]
 })
 
+prediction_df = prediction_df.sort_values(
+    by="Prediction",
+    ascending=False
+)
+
 st.subheader("📊 Prediction Table")
 
 st.dataframe(prediction_df)
 
 st.success(
     f"Total Models Compared: {len(prediction_df)}"
+)
+
+top_model = prediction_df.iloc[0]
+
+st.success(
+    f"🏆 Highest Forecast: {top_model['Model']} ({top_model['Prediction']:.0f})"
 )
 
 csv_predictions = prediction_df.to_csv(
