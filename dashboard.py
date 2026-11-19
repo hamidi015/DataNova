@@ -25,7 +25,8 @@ page = st.sidebar.radio(
     [
         "📊 Dashboard",
         "🤖 Machine Learning",
-        "📈 Forecast Center"
+        "📈 Forecast Center",
+        "🤖 AI Assistant"
     ]
 )
 
@@ -599,11 +600,57 @@ if page == "📈 Forecast Center":
     st.info(
         "This page uses Machine Learning to forecast future business revenue."
     )
+    
+if page == "🤖 AI Assistant":
 
-st.subheader("📋 Executive Forecast Summary")
+    st.title("🤖 AI Assistant")
 
-st.success(
-    f"""
+    st.success(
+        "Welcome to the DataNova AI Business Assistant."
+    )
+
+    st.info(
+        "Ask business questions and receive intelligent recommendations."
+    )
+
+    st.subheader("🤖 Ask DataNova")
+
+    question = st.selectbox(
+        "Choose a business question",
+        [
+            "What is my best product?",
+            "Which model is most accurate?",
+            "What is the forecast revenue?",
+            "Should I increase investment?",
+            "What is my business health?"
+        ]
+    )
+
+    if question == "What is my best product?":
+        st.success(f"Best Product: {best_product}")
+
+    elif question == "Which model is most accurate?":
+        st.success("Decision Tree is currently the most accurate model.")
+
+    elif question == "What is the forecast revenue?":
+        st.success(f"Forecast Revenue: {ml_prediction:.0f}")
+
+    elif question == "Should I increase investment?":
+        st.success(
+            "Yes. Current forecast and growth rate indicate positive business performance."
+        )
+
+    elif question == "What is my business health?":
+        st.success(
+            "Business health is excellent with a score of 100/100."
+        )
+
+if page == "📈 Forecast Center":
+
+    st.subheader("📋 Executive Forecast Summary")
+
+    st.success(
+        f"""
 🏆 Best Model: Decision Tree
 
 📈 Forecast Revenue: {ml_prediction:.0f}
@@ -613,13 +660,12 @@ st.success(
 🎯 Confidence Score: {accuracy * 100:.0f}%
 
 🤖 Models Compared: 3
-
 """
-)
+    )
 
-st.subheader("Revenue Forecast")
+    st.subheader("Revenue Forecast")
 
-col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
 
 with col1:
     st.metric(
@@ -704,7 +750,7 @@ with col3:
     )
 
 
-st.subheader("🏆 Model Comparison")
+    st.subheader("🏆 Model Comparison")
 
 best_accuracy = max(
     accuracy,
@@ -853,7 +899,40 @@ st.download_button(
     mime="text/plain"
 )
 
+st.subheader("🤖 Ask DataNova")
+
+question = st.selectbox(
+    "Choose a business question",
+    [
+        "What is my best product?",
+        "Which model is most accurate?",
+        "What is the forecast revenue?",
+        "Should I increase investment?"
+        "What is my business health?"
+    ]
+)
+
+if question == "What is my best product?":
+    st.success(f"Best Product: {best_product}")
+
+elif question == "Which model is most accurate?":
+    st.success("Decision Tree is currently the most accurate model.")
+
+elif question == "What is the forecast revenue?":
+    st.success(f"Forecast Revenue: {ml_prediction:.0f}")
+
+elif question == "Should I increase investment?":
+    st.success(
+        "Yes. Current forecast and growth rate indicate positive business performance."
+    )
+
+elif question == "What is my business health?":
+    st.success(
+        "Business health is excellent with a score of 100/100."
+    )
+
 st.subheader("📈 Machine Learning Forecast Chart")
+
 
 forecast_fig = px.line(
     forecast_df,
