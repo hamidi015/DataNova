@@ -629,7 +629,34 @@ if page == "🤖 AI Assistant":
     )
 
     st.subheader("🤖 Ask DataNova")
+    
+    user_question = st.text_input(
+        "Ask DataNova anything"
+)
 
+if user_question:
+    st.info(f"You asked: {user_question}")
+
+    if "best product" in user_question.lower():
+        st.success(f"Best Product: {best_product}")
+
+    elif "forecast" in user_question.lower():
+        st.success(f"Forecast Revenue: {ml_prediction:.0f}")
+
+    elif "business health" in user_question.lower():
+        st.success(f"Business Health Score: {score}/100")
+
+    elif "investment" in user_question.lower():
+        st.success(
+            "Recommendation: Increase investment and business expansion."
+        )
+
+    else:
+        st.warning(
+            "Sorry, I don't understand that question yet."
+        )
+
+    
     question = st.selectbox(
         "Choose a business question",
         [
