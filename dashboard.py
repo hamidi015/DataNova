@@ -977,34 +977,6 @@ if page == "📊 Dashboard":
 
 st.subheader("PDF Report Export")
 
-st.subheader("AI Business Advisor")
-
-if score >= 80:
-    st.success(
-        f"""
-        • {best_product} is the strongest product.
-        • Business health is excellent.
-        • Continue investing in top-performing products.
-        """
-    )
-elif score >= 60:
-    st.warning(
-        """
-        • Business performance is stable.
-        • Review weaker products.
-        • Improve revenue growth.
-        """
-    )
-else:
-    st.error(
-        """
-        • Business needs attention.
-        • Revenue and profit should be improved.
-        • Review strategy and operations.
-        """
-    )
-
-
 if st.button("Generate PDF Report"):
 
     pdf_file = generate_pdf_report(
@@ -1012,7 +984,9 @@ if st.button("Generate PDF Report"):
         total_profit,
         profit_margin,
         best_product,
-        score
+        score,
+        ml_prediction,
+        growth_rate
     )
 
     with open(pdf_file, "rb") as file:
@@ -1024,7 +998,16 @@ if st.button("Generate PDF Report"):
             mime="application/pdf"
         )
 
+st.subheader("AI Business Advisor")
 
+if score >= 80:
+    st.success(
+        f"""
+        • {best_product} is the strongest product.
+        • Business health is excellent.
+        • Continue investing in top-performing products.
+        """
+    )
 st.markdown("---")
 
 st.caption(

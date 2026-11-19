@@ -6,8 +6,11 @@ def generate_pdf_report(
     total_profit,
     profit_margin,
     best_product,
-    score
+    score,
+    forecast_revenue,
+    growth_rate
 ):
+    
     pdf_file = "business_report.pdf"
 
     pdf = canvas.Canvas(pdf_file)
@@ -59,7 +62,13 @@ def generate_pdf_report(
     pdf.drawString(
         100,
         640,
-        "Forecast Revenue: Coming Soon"
+        f"Forecast Revenue: {forecast_revenue:.0f}"
+    )
+    
+    pdf.drawString(
+        100,
+        620,
+        f"Expected Growth: {growth_rate:.2f}%"
     )
 
     pdf.save()
