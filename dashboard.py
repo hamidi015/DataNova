@@ -630,6 +630,10 @@ if page == "🤖 AI Assistant":
 
     st.subheader("🤖 Ask DataNova")
     
+    st.info(
+    "Ask me about products, forecasts, business health, investment, or machine learning models."
+)
+    
     user_question = st.text_input(
         "Ask DataNova anything"
 )
@@ -649,6 +653,11 @@ if user_question:
     elif "investment" in user_question.lower():
         st.success(
             "Recommendation: Increase investment and business expansion."
+        )
+
+    elif "accurate" in user_question.lower():
+        st.success(
+            "Decision Tree is currently the most accurate model."
         )
 
     else:
@@ -1041,5 +1050,5 @@ if score >= 80:
 st.markdown("---")
 
 st.caption(
-    "DataNova v7.3 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
+    "DataNova v8.0 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
 )
