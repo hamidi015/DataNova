@@ -665,7 +665,12 @@ if page == "🤖 AI Assistant":
         )
         elif "margin" in user_question.lower():
             st.success(
-            f"Profit Margin: {profit_margin:.2f}%"
+                f"Profit Margin: {profit_margin:.2f}%"
+        )
+
+        elif "growth" in user_question.lower():
+            st.success(
+                f"Expected Growth: {growth_rate:.2f}%"
         )
 
         elif "profit" in user_question.lower():
