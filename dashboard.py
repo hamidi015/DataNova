@@ -615,7 +615,7 @@ if page == "🤖 AI Assistant":
     
     st.metric(
         "Questions Available",
-        "7"
+        "8"
     )
     
     st.metric(
@@ -663,11 +663,16 @@ if page == "🤖 AI Assistant":
             st.success(
                 f"Total Revenue: {total_revenue}"
         )
+        elif "margin" in user_question.lower():
+            st.success(
+            f"Profit Margin: {profit_margin:.2f}%"
+        )
 
         elif "profit" in user_question.lower():
             st.success(
                 f"Total Profit: {total_profit}"
             )
+        
 
     else:
         st.warning(
