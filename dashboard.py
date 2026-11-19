@@ -589,14 +589,33 @@ if page == "📊 Dashboard":
 
 if page == "📈 Forecast Center":
 
-    st.title("🤖 Machine Learning Forecast Center")
+    st.title("📈 Forecast Center")
     
-    st.caption("DataNova v7.2 | Multi-Model Forecasting System")
+    st.caption(
+    "DataNova v7.3 | AI-Powered Multi-Model Forecasting Platform"
+)
 
 
     st.info(
         "This page uses Machine Learning to forecast future business revenue."
     )
+
+st.subheader("📋 Executive Forecast Summary")
+
+st.success(
+    f"""
+🏆 Best Model: Decision Tree
+
+📈 Forecast Revenue: {ml_prediction:.0f}
+
+📈 Expected Growth: {growth_rate:.2f}%
+
+🎯 Confidence Score: {accuracy * 100:.0f}%
+
+🤖 Models Compared: 3
+
+"""
+)
 
 st.subheader("Revenue Forecast")
 
@@ -739,12 +758,23 @@ prediction_df = pd.DataFrame({
         ml_prediction,
         rf_prediction,
         dt_prediction
+    ],
+    "Accuracy": [
+        accuracy,
+        rf_accuracy,
+        dt_accuracy
     ]
 })
 
 prediction_df = prediction_df.sort_values(
     by="Prediction",
     ascending=False
+)
+
+prediction_df.insert(
+    0,
+    "Rank",
+    range(1, len(prediction_df) + 1)
 )
 
 st.subheader("📊 Prediction Table")
@@ -761,6 +791,14 @@ st.success(
     f"🏆 Highest Forecast: {top_model['Model']} ({top_model['Prediction']:.0f})"
 )
 
+st.subheader("🏅 Model Leaderboard")
+
+st.dataframe(
+    prediction_df[
+        ["Rank", "Model", "Accuracy", "Prediction"]
+    ]
+)
+
 csv_predictions = prediction_df.to_csv(
     index=False
 )
@@ -770,6 +808,49 @@ st.download_button(
     data=csv_predictions,
     file_name="ml_predictions.csv",
     mime="text/csv"
+)
+
+st.subheader("🎯 Executive Decision")
+
+if growth_rate >= 10:
+    st.success(
+        "Recommendation: Increase investment and business expansion."
+    )
+elif growth_rate >= 5:
+    st.info(
+        "Recommendation: Maintain current strategy and monitor growth."
+    )
+else:
+    st.warning(
+        "Recommendation: Review sales and pricing strategy."
+    )
+
+st.subheader("📄 Forecast Recommendation Report")
+
+report = f"""
+Forecast Revenue: {ml_prediction:.0f}
+
+Expected Growth: {growth_rate:.2f}%
+
+Best Model: Decision Tree
+
+Confidence Score: {accuracy * 100:.0f}%
+
+Recommendation:
+Continue investing in high-performing products and monitor revenue growth trends.
+"""
+
+st.text_area(
+    "Executive Forecast Report",
+    report,
+    height=200
+)
+
+st.download_button(
+    label="📄 Download Forecast Report",
+    data=report,
+    file_name="forecast_report.txt",
+    mime="text/plain"
 )
 
 st.subheader("📈 Machine Learning Forecast Chart")
@@ -853,5 +934,5 @@ if st.button("Generate PDF Report"):
 st.markdown("---")
 
 st.caption(
-    "DataNova v7.0 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
+    "DataNova v7.3 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
 )
