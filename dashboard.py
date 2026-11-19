@@ -228,6 +228,8 @@ total_profit = df["Profit"].sum()
 
 predicted_revenue = total_revenue * 1.10
 
+missing_values = df.isnull().sum().sum()
+
 growth_rate = (
     (predicted_revenue - total_revenue)
     / total_revenue
@@ -265,38 +267,45 @@ with col4:
     )
 
 
-with col1:
-    st.subheader("Revenue by Product")
+if page == "📊 Dashboard":
 
-    fig = px.bar(
+    with col1:
+        st.subheader("Revenue by Product")
+
+        fig = px.bar(
+            df,
+            x="Product",
+            y="Revenue",
+            color="Product",
+            title="Revenue by Product"
+        )
+
+        st.plotly_chart(fig)
+
+    with col2:
+        st.subheader("Revenue Table")
+
+        st.dataframe(
+            df[["Product", "Revenue"]]
+        )
+
+if page == "📊 Dashboard":
+
+    st.subheader("Profit by Product")
+
+    profit_fig = px.bar(
         df,
         x="Product",
-        y="Revenue",
+        y="Profit",
         color="Product",
-        title="Revenue by Product"
+        title="Profit by Product"
     )
 
-    st.plotly_chart(fig)
+    st.plotly_chart(profit_fig)
 
-with col2:
-    st.subheader("Revenue Table")
-    st.dataframe(
-        df[["Product", "Revenue"]]
-    )
+if page == "📊 Dashboard":
 
-st.subheader("Profit by Product")
-
-profit_fig = px.bar(
-    df,
-    x="Product",
-    y="Profit",
-    color="Product",
-    title="Profit by Product"
-)
-
-st.plotly_chart(profit_fig)
-
-st.subheader("Revenue vs Profit Comparison")
+    st.subheader("Revenue vs Profit Comparison")
 
 comparison_df = df[
     ["Product", "Revenue", "Profit"]
@@ -321,58 +330,69 @@ best_product = df.loc[
     "Product"
 ]
 
-st.success(
-    f"🏆 Best Product: {best_product}"
-)
+if page == "📊 Dashboard":
 
-st.subheader("Automatic Summary Generator")
+    st.success(
+        f"🏆 Best Product: {best_product}"
+    )
 
-summary = f"""
-The dataset contains {len(df)} products.
+if page == "📊 Dashboard":
 
-Selected revenue is {selected_revenue}.
+    st.subheader("Automatic Summary Generator")
 
-Selected profit is {selected_profit}.
+    summary = f"""
+    The dataset contains {len(df)} products.
 
-Selected product is {selected_product}.
+    Selected revenue is {selected_revenue}.
 
-Profit margin is {profit_margin:.2f}%.
-"""
+    Selected profit is {selected_profit}.
 
-st.write(summary)
+    Selected product is {selected_product}.
 
-st.subheader("Dataset Information")
+    Profit margin is {profit_margin:.2f}%.
+    """
 
-st.info(
-    f"Dataset contains {len(df)} records and {df.shape[1]} columns."
-)
+    st.write(summary)
 
-st.success(
-    f"Total Records: {len(df)} | Total Columns: {df.shape[1]}"
-)
+if page == "📊 Dashboard":
 
-st.subheader("Dataset Insights")
+    st.subheader("Dataset Information")
+
+    st.info(
+        f"Dataset contains {len(df)} records and {df.shape[1]} columns."
+    )
+
+    st.success(
+        f"Total Records: {len(df)} | Total Columns: {df.shape[1]}"
+    )
 
 
-st.write(f"Rows: {df.shape[0]}")
 
-st.write(f"Columns: {df.shape[1]}")
-st.write(f"Total Cells: {df.shape[0] * df.shape[1]}")
+if page == "📊 Dashboard":
 
-st.write("Column Names:")
+    st.subheader("Dataset Insights")
 
-st.write(list(df.columns))
+    st.write(f"Rows: {df.shape[0]}")
 
-st.subheader("Data Quality Check")
+    st.write(f"Columns: {df.shape[1]}")
 
-missing_values = df.isnull().sum().sum()
+    st.write(f"Total Cells: {df.shape[0] * df.shape[1]}")
 
-st.write(f"Missing Values: {missing_values}")
+    st.write("Column Names:")
 
-if missing_values == 0:
-    st.success("Data Quality Score: 100%")
-else:
-    st.warning("Data Quality Score: Needs Review")
+    st.write(list(df.columns))
+
+if page == "📊 Dashboard":
+
+    st.subheader("Data Quality Check")
+
+
+    st.write(f"Missing Values: {missing_values}")
+
+    if missing_values == 0:
+        st.success("Data Quality Score: 100%")
+    else:
+        st.warning("Data Quality Score: Needs Review")
 
 if page == "📊 Dashboard":
 
