@@ -615,7 +615,7 @@ if page == "🤖 AI Assistant":
     
     st.metric(
         "Questions Available",
-        "5"
+        "7"
     )
     
     st.metric(
@@ -641,24 +641,33 @@ if page == "🤖 AI Assistant":
     if user_question:
         st.info(f"You asked: {user_question}")
 
-    if "best product" in user_question.lower():
-        st.success(f"Best Product: {best_product}")
+        if "best product" in user_question.lower():
+            st.success(f"Best Product: {best_product}")
 
-    elif "forecast" in user_question.lower():
-        st.success(f"Forecast Revenue: {ml_prediction:.0f}")
+        elif "forecast" in user_question.lower():
+            st.success(f"Forecast Revenue: {ml_prediction:.0f}")
 
-    elif "business health" in user_question.lower():
-        st.success(f"Business Health Score: {score}/100")
+        elif "business health" in user_question.lower():
+            st.success(f"Business Health Score: {score}/100")
 
-    elif "investment" in user_question.lower():
-        st.success(
-            "Recommendation: Increase investment and business expansion."
+        elif "investment" in user_question.lower():
+            st.success(
+                "Recommendation: Increase investment and business expansion."
+            )
+
+        elif "accurate" in user_question.lower():
+            st.success(
+                "Decision Tree is currently the most accurate model."
+            )
+        elif "revenue" in user_question.lower():
+            st.success(
+                f"Total Revenue: {total_revenue}"
         )
 
-    elif "accurate" in user_question.lower():
-        st.success(
-            "Decision Tree is currently the most accurate model."
-        )
+        elif "profit" in user_question.lower():
+            st.success(
+                f"Total Profit: {total_profit}"
+            )
 
     else:
         st.warning(
@@ -1050,5 +1059,5 @@ if score >= 80:
 st.markdown("---")
 
 st.caption(
-    "DataNova v8.0 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
+    "DataNova v8.2 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
 )
