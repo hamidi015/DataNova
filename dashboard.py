@@ -615,7 +615,7 @@ if page == "🤖 AI Assistant":
     
     st.metric(
         "Questions Available",
-        "8"
+        "10"
     )
     
     st.metric(
@@ -653,12 +653,12 @@ if page == "🤖 AI Assistant":
         elif "investment" in user_question.lower():
             st.success(
                 "Recommendation: Increase investment and business expansion."
-            )
+        )
 
         elif "accurate" in user_question.lower():
             st.success(
                 "Decision Tree is currently the most accurate model."
-            )
+        )
         elif "revenue" in user_question.lower():
             st.success(
                 f"Total Revenue: {total_revenue}"
@@ -676,8 +676,12 @@ if page == "🤖 AI Assistant":
         elif "profit" in user_question.lower():
             st.success(
                 f"Total Profit: {total_profit}"
-            )
+        )
         
+        elif "confidence" in user_question.lower():
+            st.success(
+                f"Confidence Score: {accuracy * 100:.0f}%"
+        )
 
     else:
         st.warning(
