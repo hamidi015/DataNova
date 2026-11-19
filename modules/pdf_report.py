@@ -8,7 +8,8 @@ def generate_pdf_report(
     best_product,
     score,
     forecast_revenue,
-    growth_rate
+    growth_rate,
+    confidence_score
 ):
     
     pdf_file = "business_report.pdf"
@@ -69,6 +70,12 @@ def generate_pdf_report(
         100,
         620,
         f"Expected Growth: {growth_rate:.2f}%"
+    )
+    
+    pdf.drawString(
+        100,
+        600,
+        f"Confidence Score: {confidence_score:.0f}%"
     )
 
     pdf.save()

@@ -986,8 +986,10 @@ if st.button("Generate PDF Report"):
         best_product,
         score,
         ml_prediction,
-        growth_rate
+        growth_rate,
+        accuracy * 100
     )
+
 
     with open(pdf_file, "rb") as file:
 
@@ -1008,6 +1010,7 @@ if score >= 80:
         • Continue investing in top-performing products.
         """
     )
+    
 st.markdown("---")
 
 st.caption(
