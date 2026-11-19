@@ -638,8 +638,8 @@ if page == "🤖 AI Assistant":
         "Ask DataNova anything"
 )
 
-if user_question:
-    st.info(f"You asked: {user_question}")
+    if user_question:
+        st.info(f"You asked: {user_question}")
 
     if "best product" in user_question.lower():
         st.success(f"Best Product: {best_product}")
