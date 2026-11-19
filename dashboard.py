@@ -612,6 +612,21 @@ if page == "🤖 AI Assistant":
     st.info(
         "Ask business questions and receive intelligent recommendations."
     )
+    
+    st.metric(
+        "Questions Available",
+        "5"
+    )
+    
+    st.metric(
+        "AI Status",
+        "Online"
+    )
+    
+    st.metric(
+        "Version",
+        "v7.5"
+    )
 
     st.subheader("🤖 Ask DataNova")
 
