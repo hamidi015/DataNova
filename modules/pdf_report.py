@@ -77,6 +77,12 @@ def generate_pdf_report(
         600,
         f"Confidence Score: {confidence_score:.0f}%"
     )
+    
+    pdf.drawString(
+        100,
+        580,
+        "Best Model: Decision Tree"
+    )
 
     pdf.save()
 
