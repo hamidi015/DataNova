@@ -615,7 +615,7 @@ if page == "🤖 AI Assistant":
     
     st.metric(
         "Questions Available",
-        "10"
+        "11"
     )
     
     st.metric(
@@ -676,6 +676,11 @@ if page == "🤖 AI Assistant":
         elif "profit" in user_question.lower():
             st.success(
                 f"Total Profit: {total_profit}"
+        )
+        
+        elif "best model" in user_question.lower():
+            st.success(
+                "Best Model: Decision Tree"
         )
         
         elif "confidence" in user_question.lower():
