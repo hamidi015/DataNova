@@ -11,6 +11,10 @@ from sklearn.tree import DecisionTreeRegressor
 
 from modules.pdf_report import generate_pdf_report
 
+# =====================================
+# SHARED SECTION - ALL PAGES
+# =====================================
+
 uploaded_file = st.file_uploader(
     "Upload a CSV or Excel file",
     type=["csv", "xlsx"]
@@ -41,6 +45,7 @@ st.sidebar.write("Features")
 st.sidebar.write("✅ Analytics")
 st.sidebar.write("✅ Machine Learning")
 st.sidebar.write("✅ PDF Reports")
+
 
 if page == "📊 Dashboard":
     st.sidebar.success("📊 Dashboard")
@@ -93,7 +98,6 @@ if page == "📊 Dashboard":
         f"Loaded file: {uploaded_file.name}"
     )
 
-
 product_options = ["All Products"] + list(df["Product"])
 
 selected_product = st.selectbox(
@@ -129,6 +133,10 @@ if search_term:
 selected_revenue = filtered_df["Revenue"].sum()
 
 selected_profit = filtered_df["Profit"].sum()
+
+# =====================================
+# DASHBOARD PAGE
+# =====================================
 
 if page == "📊 Dashboard":
 
@@ -995,38 +1003,6 @@ st.download_button(
     file_name="forecast_report.txt",
     mime="text/plain"
 )
-
-st.subheader("🤖 Ask DataNova")
-
-question = st.selectbox(
-    "Choose a business question",
-    [
-        "What is my best product?",
-        "Which model is most accurate?",
-        "What is the forecast revenue?",
-        "Should I increase investment?"
-        "What is my business health?"
-    ]
-)
-
-if question == "What is my best product?":
-    st.success(f"Best Product: {best_product}")
-
-elif question == "Which model is most accurate?":
-    st.success("Decision Tree is currently the most accurate model.")
-
-elif question == "What is the forecast revenue?":
-    st.success(f"Forecast Revenue: {ml_prediction:.0f}")
-
-elif question == "Should I increase investment?":
-    st.success(
-        "Yes. Current forecast and growth rate indicate positive business performance."
-    )
-
-elif question == "What is my business health?":
-    st.success(
-        "Business health is excellent with a score of 100/100."
-    )
 
 st.subheader("📈 Machine Learning Forecast Chart")
 
