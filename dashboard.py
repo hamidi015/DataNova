@@ -684,7 +684,6 @@ if page == "🤖 Machine Learning":
         rf_accuracy,
         dt_accuracy
     )
-
     if best_accuracy == accuracy:
         st.success(
             f"Linear Regression is the best model with accuracy {accuracy:.2f}"
@@ -700,6 +699,31 @@ if page == "🤖 Machine Learning":
             f"Decision Tree is the best model with accuracy {dt_accuracy:.2f}"
         )
 
+    st.subheader("🏅 Model Leaderboard")
+
+    leaderboard_df = pd.DataFrame({
+        "Model": [
+            "Linear Regression",
+            "Random Forest",
+            "Decision Tree"
+        ],
+        "Accuracy": [
+            accuracy,
+            rf_accuracy,
+            dt_accuracy
+        ]
+    })
+
+    leaderboard_df = leaderboard_df.sort_values(
+        by="Accuracy",
+        ascending=False
+    )
+
+    st.dataframe(leaderboard_df)
+
+    st.info(
+        "Decision Tree currently provides the highest accuracy and is recommended for forecasting."
+    )
 
 if page == "🤖 AI Assistant":
 
