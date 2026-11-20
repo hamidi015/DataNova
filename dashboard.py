@@ -248,33 +248,35 @@ growth_rate = (
 profit_margin = (
     selected_profit / selected_revenue
 ) * 100
+##### Here I did changes I will come back for it later########
+if page == "📊 Dashboard":
 
-col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4 = st.columns(4)
 
-with col1:
-    st.metric(
-        "Selected Revenue",
-        selected_revenue
+    with col1:
+        st.metric(
+            "Selected Revenue",
+            selected_revenue
     )
 
-with col2:
-    st.metric(
-        "Selected Profit",
-        selected_profit
+    with col2:
+        st.metric(
+            "Selected Profit",
+            selected_profit
     )
 
-with col3:
-    st.metric(
-        "Profit Margin %",
-        f"{profit_margin:.2f}%"
+    with col3:
+        st.metric(
+            "Profit Margin %",
+            f"{profit_margin:.2f}%"
     )
 
-with col4:
-    st.metric(
-        "Products",
-        len(df)
+    with col4:
+        st.metric(
+            "Products",
+            len(df)
     )
-
+####################### bis here #############
 
 if page == "📊 Dashboard":
 
@@ -772,23 +774,23 @@ if page == "📈 Forecast Center":
 
     col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.metric(
-        "Current Revenue",
-        f"{total_revenue:.0f}"
-    )
+    with col1:
+        st.metric(
+            "Current Revenue",
+            f"{total_revenue:.0f}"
+        )
 
-with col2:
-    st.metric(
-        "Forecast Revenue",
-        f"{ml_prediction:.0f}"
-    )
+    with col2:
+        st.metric(
+            "Forecast Revenue",
+            f"{ml_prediction:.0f}"
+        )
 
-with col3:
-    st.metric(
-        "Expected Growth %",
-        f"{growth_rate:.2f}%"
-    )
+    with col3:
+        st.metric(
+            "Expected Growth %",
+            f"{growth_rate:.2f}%"
+        )
 
 st.info(
     f"""
