@@ -98,16 +98,23 @@ if page == "📊 Dashboard":
         f"Loaded file: {uploaded_file.name}"
     )
 
-product_options = ["All Products"] + list(df["Product"])
+if page == "📊 Dashboard":
 
-selected_product = st.selectbox(
-    "Choose a Product",
-    product_options
-)
+    product_options = ["All Products"] + list(df["Product"])
 
-search_term = st.text_input(
-    "Search Product"
-)
+    selected_product = st.selectbox(
+        "Choose a Product",
+        product_options
+    )
+
+    search_term = st.text_input(
+        "Search Product"
+    )
+
+else:
+
+    selected_product = "All Products"
+    search_term = ""
 
 if page == "📊 Dashboard":
     st.info(
@@ -154,14 +161,16 @@ if page == "📊 Dashboard":
     st.dataframe(filtered_df)
 
 
-csv = filtered_df.to_csv(index=False)
+if page == "📊 Dashboard":
 
-st.download_button(
-    label="Download Filtered Data",
-    data=csv,
-    file_name=f"{selected_product}_data.csv",
-    mime="text/csv"
-)
+    csv = filtered_df.to_csv(index=False)
+
+    st.download_button(
+        label="Download Filtered Data",
+        data=csv,
+        file_name=f"{selected_product}_data.csv",
+        mime="text/csv"
+    )
 
 
 
@@ -601,16 +610,97 @@ if page == "📊 Dashboard":
 if page == "📈 Forecast Center":
 
     st.title("📈 Forecast Center")
-    
-    st.caption(
-    "DataNova v8.6 | AI-Powered Multi-Model Forecasting Platform"
-)
 
+    st.caption(
+        "DataNova v8.6 | AI-Powered Multi-Model Forecasting Platform"
+    )
 
     st.info(
         "This page uses Machine Learning to forecast future business revenue."
     )
+
+
+# =====================================
+# MACHINE LEARNING PAGE
+# =====================================
+
+if page == "🤖 Machine Learning":
+
+    st.title("🤖 Machine Learning")
+
+    st.info(
+        "Compare machine learning models and evaluate prediction accuracy."
+    )
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "Linear Regression",
+            f"{ml_prediction:.0f}"
+        )
+
+    with col2:
+        st.metric(
+            "Random Forest",
+            f"{rf_prediction:.0f}"
+        )
+
+    with col3:
+        st.metric(
+            "Decision Tree",
+            f"{dt_prediction:.0f}"
+        )
+
+    st.metric(
+        "AI Confidence Score",
+        f"{accuracy * 100:.0f}%"
+    )
     
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "Linear Regression Accuracy",
+            f"{accuracy:.2f}"
+        )
+
+    with col2:
+        st.metric(
+            "Random Forest Accuracy",
+            f"{rf_accuracy:.2f}"
+        )
+
+    with col3:
+        st.metric(
+            "Decision Tree Accuracy",
+            f"{dt_accuracy:.2f}"
+        )
+    
+    st.subheader("🏆 Best Model")
+
+    best_accuracy = max(
+        accuracy,
+        rf_accuracy,
+        dt_accuracy
+    )
+
+    if best_accuracy == accuracy:
+        st.success(
+            f"Linear Regression is the best model with accuracy {accuracy:.2f}"
+        )
+
+    elif best_accuracy == rf_accuracy:
+        st.success(
+            f"Random Forest is the best model with accuracy {rf_accuracy:.2f}"
+        )
+
+    else:
+        st.success(
+            f"Decision Tree is the best model with accuracy {dt_accuracy:.2f}"
+        )
+
+
 if page == "🤖 AI Assistant":
 
     st.title("🤖 AI Assistant")
