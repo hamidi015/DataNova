@@ -792,232 +792,236 @@ if page == "📈 Forecast Center":
             f"{growth_rate:.2f}%"
         )
 
-st.info(
-    f"""
-Current Revenue: {total_revenue}
+#############################################################
+    st.info(
+        f"""
+    Current Revenue: {total_revenue}
 
-Predicted Revenue: {ml_prediction:.0f}
+    Predicted Revenue: {ml_prediction:.0f}
 
-Expected Growth: {growth_rate:.2f}%
-"""
-)
+    Expected Growth: {growth_rate:.2f}%
+    """
+    )
 
-st.subheader("🤖 Machine Learning Forecast")
+    st.subheader("🤖 Machine Learning Forecast")
 
-col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
 
-with col1:
+    with col1:
+        st.metric(
+            "Linear Regression",
+            f"{ml_prediction:.0f}"
+        )
+
+    with col2:
+        st.metric(
+            "Random Forest",
+            f"{rf_prediction:.0f}"
+        )
+
+    with col3:
+        st.metric(
+            "Decision Tree",
+            f"{dt_prediction:.0f}"
+        )
+
     st.metric(
-        "Linear Regression",
-        f"{ml_prediction:.0f}"
+        "AI Confidence Score",
+        f"{accuracy * 100:.0f}%"
     )
 
-with col2:
-    st.metric(
-        "Random Forest",
-        f"{rf_prediction:.0f}"
-    )
+    if accuracy >= 0.90:
+        st.success("Confidence Level: Very High")
+    elif accuracy >= 0.75:
+        st.info("Confidence Level: High")
+    else:
+        st.warning("Confidence Level: Moderate")
 
-with col3:
-    st.metric(
-        "Decision Tree",
-        f"{dt_prediction:.0f}"
-    )
+    col1, col2, col3 = st.columns(3)
 
-st.metric(
-    "AI Confidence Score",
-    f"{accuracy * 100:.0f}%"
-)
+    with col1:
+        st.metric(
+            "Linear Regression Accuracy",
+            f"{accuracy:.2f}"
+        )
 
-if accuracy >= 0.90:
-    st.success("Confidence Level: Very High")
-elif accuracy >= 0.75:
-    st.info("Confidence Level: High")
-else:
-    st.warning("Confidence Level: Moderate")
+    with col2:
+        st.metric(
+            "Random Forest Accuracy",
+            f"{rf_accuracy:.2f}"
+        )
 
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.metric(
-        "Linear Regression Accuracy",
-        f"{accuracy:.2f}"
-    )
-
-with col2:
-    st.metric(
-        "Random Forest Accuracy",
-        f"{rf_accuracy:.2f}"
-    )
-
-with col3:
-    st.metric(
-        "Decision Tree Accuracy",
-        f"{dt_accuracy:.2f}"
-    )
+    with col3:
+        st.metric(
+            "Decision Tree Accuracy",
+            f"{dt_accuracy:.2f}"
+        )
 
 
-    st.subheader("🏆 Model Comparison")
+        st.subheader("🏆 Model Comparison")
 
-best_accuracy = max(
-    accuracy,
-    rf_accuracy,
-    dt_accuracy
-)
-
-if best_accuracy == accuracy:
-    st.success(
-        f"Best Model: Linear Regression (Accuracy: {accuracy:.2f})"
-    )
-
-elif best_accuracy == rf_accuracy:
-    st.success(
-        f"Best Model: Random Forest (Accuracy: {rf_accuracy:.2f})"
-    )
-
-else:
-    st.success(
-        f"Best Model: Decision Tree (Accuracy: {dt_accuracy:.2f})"
-    )
-
-st.subheader("🤖 AI Recommendation")
-
-if growth_rate > 5:
-    st.success(
-        "AI Recommendation: Business growth is positive. Consider increasing inventory and marketing investment."
-    )
-
-else:
-    st.warning(
-        "AI Recommendation: Growth is limited. Review pricing and sales strategy."
-    )
-
-if ml_prediction > rf_prediction:
-    st.success(
-        f"Linear Regression predicts higher revenue: {ml_prediction:.0f}"
-    )
-else:
-    st.success(
-        f"Random Forest predicts higher revenue: {rf_prediction:.0f}"
-    )
-
-prediction_df = pd.DataFrame({
-    "Model": [
-        "Linear Regression",
-        "Random Forest",
-        "Decision Tree"
-    ],
-    "Prediction": [
-        ml_prediction,
-        rf_prediction,
-        dt_prediction
-    ],
-    "Accuracy": [
+    best_accuracy = max(
         accuracy,
         rf_accuracy,
         dt_accuracy
-    ]
-})
+    )
 
-prediction_df = prediction_df.sort_values(
-    by="Prediction",
-    ascending=False
-)
+    if best_accuracy == accuracy:
+        st.success(
+            f"Best Model: Linear Regression (Accuracy: {accuracy:.2f})"
+        )
 
-prediction_df.insert(
-    0,
-    "Rank",
-    range(1, len(prediction_df) + 1)
-)
+    elif best_accuracy == rf_accuracy:
+        st.success(
+            f"Best Model: Random Forest (Accuracy: {rf_accuracy:.2f})"
+        )
 
-st.subheader("📊 Prediction Table")
+    else:
+        st.success(
+            f"Best Model: Decision Tree (Accuracy: {dt_accuracy:.2f})"
+        )
 
-st.dataframe(prediction_df)
+    st.subheader("🤖 AI Recommendation")
 
-st.success(
-    f"Total Models Compared: {len(prediction_df)}"
-)
+    if growth_rate > 5:
+        st.success(
+            "AI Recommendation: Business growth is positive. Consider increasing inventory and marketing investment."
+        )
 
-top_model = prediction_df.iloc[0]
+    else:
+        st.warning(
+            "AI Recommendation: Growth is limited. Review pricing and sales strategy."
+        )
 
-st.success(
-    f"🏆 Highest Forecast: {top_model['Model']} ({top_model['Prediction']:.0f})"
-)
+    if ml_prediction > rf_prediction:
+        st.success(
+            f"Linear Regression predicts higher revenue: {ml_prediction:.0f}"
+        )
+    else:
+        st.success(
+            f"Random Forest predicts higher revenue: {rf_prediction:.0f}"
+        )
 
-st.subheader("🏅 Model Leaderboard")
+    prediction_df = pd.DataFrame({
+        "Model": [
+            "Linear Regression",
+            "Random Forest",
+            "Decision Tree"
+        ],
+        "Prediction": [
+            ml_prediction,
+            rf_prediction,
+            dt_prediction
+        ],
+        "Accuracy": [
+            accuracy,
+            rf_accuracy,
+            dt_accuracy
+        ]
+    })
 
-st.dataframe(
-    prediction_df[
-        ["Rank", "Model", "Accuracy", "Prediction"]
-    ]
-)
+    prediction_df = prediction_df.sort_values(
+        by="Prediction",
+        ascending=False
+    )
 
-csv_predictions = prediction_df.to_csv(
-    index=False
-)
+    prediction_df.insert(
+        0,
+        "Rank",
+        range(1, len(prediction_df) + 1)
+    )
 
-st.download_button(
-    label="📥 Download ML Predictions",
-    data=csv_predictions,
-    file_name="ml_predictions.csv",
-    mime="text/csv"
-)
+    st.subheader("📊 Prediction Table")
 
-st.subheader("🎯 Executive Decision")
+    st.dataframe(prediction_df)
 
-if growth_rate >= 10:
     st.success(
-        "Recommendation: Increase investment and business expansion."
-    )
-elif growth_rate >= 5:
-    st.info(
-        "Recommendation: Maintain current strategy and monitor growth."
-    )
-else:
-    st.warning(
-        "Recommendation: Review sales and pricing strategy."
+        f"Total Models Compared: {len(prediction_df)}"
     )
 
-st.subheader("📄 Forecast Recommendation Report")
+    top_model = prediction_df.iloc[0]
 
-report = f"""
-Forecast Revenue: {ml_prediction:.0f}
+    st.success(
+        f"🏆 Highest Forecast: {top_model['Model']} ({top_model['Prediction']:.0f})"
+    )
 
-Expected Growth: {growth_rate:.2f}%
+    st.subheader("🏅 Model Leaderboard")
 
-Best Model: Decision Tree
+    st.dataframe(
+        prediction_df[
+            ["Rank", "Model", "Accuracy", "Prediction"]
+        ]
+    )
 
-Confidence Score: {accuracy * 100:.0f}%
+    csv_predictions = prediction_df.to_csv(
+        index=False
+    )
 
-Recommendation:
-Continue investing in high-performing products and monitor revenue growth trends.
-"""
+    st.download_button(
+        label="📥 Download ML Predictions",
+        data=csv_predictions,
+        file_name="ml_predictions.csv",
+        mime="text/csv"
+    )
 
-st.text_area(
-    "Executive Forecast Report",
-    report,
-    height=200
-)
+    st.subheader("🎯 Executive Decision")
 
-st.download_button(
-    label="📄 Download Forecast Report",
-    data=report,
-    file_name="forecast_report.txt",
-    mime="text/plain"
-)
+    if growth_rate >= 10:
+        st.success(
+            "Recommendation: Increase investment and business expansion."
+        )
+    elif growth_rate >= 5:
+        st.info(
+            "Recommendation: Maintain current strategy and monitor growth."
+        )
+    else:
+        st.warning(
+            "Recommendation: Review sales and pricing strategy."
+        )
 
-st.subheader("📈 Machine Learning Forecast Chart")
+    st.subheader("📄 Forecast Recommendation Report")
+
+    report = f"""
+    Forecast Revenue: {ml_prediction:.0f}
+
+    Expected Growth: {growth_rate:.2f}%
+
+    Best Model: Decision Tree
+
+    Confidence Score: {accuracy * 100:.0f}%
+
+    Recommendation:
+    Continue investing in high-performing products and monitor revenue growth trends.
+    """
+
+    st.text_area(
+        "Executive Forecast Report",
+        report,
+        height=200
+    )
+
+    st.download_button(
+        label="📄 Download Forecast Report",
+        data=report,
+        file_name="forecast_report.txt",
+        mime="text/plain"
+    )
+
+    st.subheader("📈 Machine Learning Forecast Chart")
 
 
-forecast_fig = px.line(
-    forecast_df,
-    x="Month",
-    y="Revenue",
-    markers=True,
-    title="Revenue Forecast with Machine Learning"
-)
+    forecast_fig = px.line(
+        forecast_df,
+        x="Month",
+        y="Revenue",
+        markers=True,
+        title="Revenue Forecast with Machine Learning"
+    )
 
-st.plotly_chart(forecast_fig)
+    st.plotly_chart(forecast_fig)
+
+##########################################################
+
 
 # Product Summary
 if page == "📊 Dashboard":
@@ -1035,43 +1039,44 @@ if page == "📊 Dashboard":
         f"Total Products Analyzed: {len(df)}"
     )
 
-st.subheader("PDF Report Export")
+if page == "📊 Dashboard":
 
-if st.button("Generate PDF Report"):
+    st.subheader("PDF Report Export")
 
-    pdf_file = generate_pdf_report(
-        total_revenue,
-        total_profit,
-        profit_margin,
-        best_product,
-        score,
-        ml_prediction,
-        growth_rate,
-        accuracy * 100
-    )
+    if st.button("Generate PDF Report"):
 
-
-    with open(pdf_file, "rb") as file:
-
-        st.download_button(
-            label="Download PDF Report",
-            data=file,
-            file_name="DataNova_Report.pdf",
-            mime="application/pdf"
+        pdf_file = generate_pdf_report(
+            total_revenue,
+            total_profit,
+            profit_margin,
+            best_product,
+            score,
+            ml_prediction,
+            growth_rate,
+            accuracy * 100
         )
 
-st.subheader("AI Business Advisor")
+        with open(pdf_file, "rb") as file:
 
-if score >= 80:
-    st.success(
-        f"""
-        • {best_product} is the strongest product.
-        • Business health is excellent.
-        • Continue investing in top-performing products.
-        """
-    )
-    
-st.markdown("---")
+            st.download_button(
+                label="Download PDF Report",
+                data=file,
+                file_name="DataNova_Report.pdf",
+                mime="application/pdf"
+            )
+
+    st.subheader("AI Business Advisor")
+
+    if score >= 80:
+        st.success(
+            f"""
+            • {best_product} is the strongest product.
+            • Business health is excellent.
+            • Continue investing in top-performing products.
+            """
+        )
+
+    st.markdown("---")
 
 st.caption(
     "DataNova v8.6 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
