@@ -3,3 +3,5 @@ pandas
 plotly
 openpyxl
 reportlab==4.2.5
+scikit-learn
+numpy
