@@ -893,6 +893,8 @@ if page == "🤖 Machine Learning":
             "Business health is excellent with a score of 100/100."
         )
 
+#####################################################
+
 if page == "📈 Forecast Center":
 
     st.subheader("📋 Executive Forecast Summary")
