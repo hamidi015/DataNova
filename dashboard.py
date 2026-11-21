@@ -725,22 +725,49 @@ if page == "🤖 Machine Learning":
         "Decision Tree currently provides the highest accuracy and is recommended for forecasting."
     )
 
-if page == "🤖 AI Assistant":
+    st.subheader("📊 Model Accuracy Comparison")
 
-    st.title("🤖 AI Assistant")
+    chart_df = pd.DataFrame({
+        "Model": [
+            "Linear Regression",
+            "Random Forest",
+            "Decision Tree"
+        ],
+        "Accuracy": [
+            accuracy,
+            rf_accuracy,
+            dt_accuracy
+        ]
+    })
 
-    st.success(
-        "Welcome to the DataNova AI Business Assistant."
+    chart_fig = px.bar(
+        chart_df,
+        x="Model",
+        y="Accuracy",
+        color="Model",
+        title="Machine Learning Model Accuracy"
     )
 
-    st.info(
-        "Ask business questions and receive intelligent recommendations."
-    )
-    
-    st.metric(
-        "Questions Available",
-        "14"
-    )
+    st.plotly_chart(chart_fig)
+
+    if page == "🤖 AI Assistant":
+        
+        st.title("🤖 AI Assistant")
+
+        st.success(
+            "Welcome to the DataNova AI Business Assistant."
+        )
+
+        st.info(
+            "Ask business questions and receive intelligent recommendations."
+        )
+
+        st.metric(
+            "Questions Available",
+            "14"
+        )
+
+    ...
     
     st.metric(
         "AI IQ",
