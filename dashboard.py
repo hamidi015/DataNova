@@ -20,7 +20,7 @@ uploaded_file = st.file_uploader(
     type=["csv", "xlsx"]
 )
 
-st.title("🚀 DataNova v8.6 AI Business Analytics Platform")
+st.title("🚀 DataNova v8.7 AI Business Analytics Platform")
 
 st.caption("AI-Powered Business Analytics Dashboard")
 
@@ -36,7 +36,7 @@ page = st.sidebar.radio(
 
 st.sidebar.markdown("---")
 
-st.sidebar.success("🚀 DataNova v8.6")
+st.sidebar.success("🚀 DataNova v8.7")
 
 st.sidebar.markdown("---")
 
@@ -612,7 +612,7 @@ if page == "📈 Forecast Center":
     st.title("📈 Forecast Center")
 
     st.caption(
-        "DataNova v8.6 | AI-Powered Multi-Model Forecasting Platform"
+        "DataNova v8.7 | AI-Powered Multi-Model Forecasting Platform"
     )
 
     st.info(
@@ -776,7 +776,7 @@ if page == "🤖 Machine Learning":
     
     st.metric(
         "Version",
-        "v8.6"
+        "v8.7"
     )
 
     st.subheader("🤖 Ask DataNova")
@@ -1222,5 +1222,5 @@ if page == "📊 Dashboard":
     st.markdown("---")
 
 st.caption(
-    "DataNova v8.6 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
+    "DataNova v8.7 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
 )
