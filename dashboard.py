@@ -781,6 +781,22 @@ if page == "🤖 AI Assistant":
         "v8.7"
     )
 
+    st.subheader("🤖 AI Business Summary")
+
+    st.success(
+        f"""
+🏆 Best Product: {best_product}
+
+💰 Total Revenue: {total_revenue}
+
+💵 Total Profit: {total_profit}
+
+🎯 Business Health Score: {score}/100
+
+📈 Forecast Revenue: {ml_prediction:.0f}
+"""
+    )
+
     st.subheader("🤖 Ask DataNova")
     
     st.info(
