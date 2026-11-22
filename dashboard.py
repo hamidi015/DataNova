@@ -754,30 +754,28 @@ if page == "🤖 Machine Learning":
 
     st.plotly_chart(chart_fig)
 
-    if page == "🤖 AI Assistant":
+if page == "🤖 AI Assistant":
         
-        st.title("🤖 AI Assistant")
+    st.title("🤖 AI Assistant")
 
-        st.success(
-            "Welcome to the DataNova AI Business Assistant."
-        )
+    st.success(
+        "Welcome to the DataNova AI Business Assistant."
+    )
 
-        st.info(
-            "Ask business questions and receive intelligent recommendations."
-        )
+    st.info(
+        "Ask business questions and receive intelligent recommendations."
+    )
 
-        st.metric(
-            "Questions Available",
-            "14"
-        )
+    st.metric(
+        "Questions Available",
+        "14"
+    )
 
-    ...
-    
     st.metric(
         "AI IQ",
         "14 Skills"
     )
-    
+
     st.metric(
         "Version",
         "v8.7"
@@ -901,8 +899,6 @@ if page == "🤖 Machine Learning":
 
 if page == "📈 Forecast Center":
 
-    st.subheader("📋 Executive Forecast Summary")
-
     st.success(
         f"""
 🏆 Best Model: Decision Tree
@@ -913,11 +909,13 @@ if page == "📈 Forecast Center":
 
 🎯 Confidence Score: {accuracy * 100:.0f}%
 
+✅ Forecast Reliability: Very High
+
 📊 Models Compared: 3
 
 💡 Recommendation: Continue business expansion.
 """
-    )
+)
 
     st.subheader("📈 Revenue Forecast")
 
@@ -941,16 +939,13 @@ if page == "📈 Forecast Center":
             f"{growth_rate:.2f}%"
         )
 
-#############################################################
+
     st.info(
-        f"""
-    Current Revenue: {total_revenue}
-
-    Predicted Revenue: {ml_prediction:.0f}
-
-    Expected Growth: {growth_rate:.2f}%
-    """
+        f"Current Revenue: {total_revenue}\n"
+        f"Predicted Revenue: {ml_prediction:.0f}\n"
+        f"Expected Growth: {growth_rate:.2f}%"
     )
+
 
     st.subheader("🔬 Model Forecast Details")
     
@@ -1136,18 +1131,13 @@ if page == "📈 Forecast Center":
 
     st.subheader("📄 Forecast Recommendation Report")
 
-    report = f"""
-    Forecast Revenue: {ml_prediction:.0f}
-
-    Expected Growth: {growth_rate:.2f}%
-
-    Best Model: Decision Tree
-
-    Confidence Score: {accuracy * 100:.0f}%
-
-    Recommendation:
-    Continue investing in high-performing products and monitor revenue growth trends.
-    """
+    report = (
+        f"Forecast Revenue: {ml_prediction:.0f}\n"
+        f"Expected Growth: {growth_rate:.2f}%\n"
+        f"Best Model: Decision Tree\n"
+        f"Confidence Score: {accuracy * 100:.0f}%\n"
+        f"Recommendation: Continue investing in high-performing products and monitor revenue growth trends."
+    )
 
     st.text_area(
         "Executive Forecast Report",
@@ -1220,18 +1210,15 @@ if page == "📊 Dashboard":
                 mime="application/pdf"
             )
 
-    st.subheader("AI Business Advisor")
+st.subheader("AI Business Advisor")
 
-    if score >= 80:
-        st.success(
-            f"""
-            • {best_product} is the strongest product.
-            • Business health is excellent.
-            • Continue investing in top-performing products.
-            """
-        )
+st.success(
+    f"• {best_product} is the strongest product.\n"
+    "• Business health is excellent.\n"
+    "• Continue investing in top-performing products."
+)
 
-    st.markdown("---")
+st.markdown("---")
 
 st.caption(
     "DataNova v8.7 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
