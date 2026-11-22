@@ -914,6 +914,8 @@ if page == "📈 Forecast Center":
 🎯 Confidence Score: {accuracy * 100:.0f}%
 
 📊 Models Compared: 3
+
+💡 Recommendation: Continue business expansion.
 """
     )
 
@@ -1115,6 +1117,8 @@ if page == "📈 Forecast Center":
         mime="text/csv"
     )
 
+    st.markdown("---")
+    
     st.subheader("🎯 Executive Decision")
 
     if growth_rate >= 10:
