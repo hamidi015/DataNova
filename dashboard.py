@@ -611,6 +611,10 @@ if page == "📈 Forecast Center":
 
     st.title("📈 Forecast Center")
 
+    st.success(
+        "AI-powered forecasting and future revenue analysis."
+    )
+
     st.caption(
         "DataNova v8.7 | AI-Powered Multi-Model Forecasting Platform"
     )
@@ -913,7 +917,7 @@ if page == "📈 Forecast Center":
 """
     )
 
-    st.subheader("Revenue Forecast")
+    st.subheader("📈 Revenue Forecast")
 
     col1, col2, col3 = st.columns(3)
 
@@ -1024,7 +1028,7 @@ if page == "📈 Forecast Center":
             f"Best Model: Decision Tree (Accuracy: {dt_accuracy:.2f})"
         )
 
-    st.subheader("🤖 AI Recommendation")
+    st.subheader("💡 Forecast Recommendation")
 
     if growth_rate > 5:
         st.success(
