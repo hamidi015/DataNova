@@ -913,7 +913,7 @@ if page == "📈 Forecast Center":
 
 🎯 Confidence Score: {accuracy * 100:.0f}%
 
-🤖 Models Compared: 3
+📊 Models Compared: 3
 """
     )
 
@@ -950,7 +950,11 @@ if page == "📈 Forecast Center":
     """
     )
 
-    st.subheader("🤖 Machine Learning Forecast")
+    st.subheader("🔬 Model Forecast Details")
+    
+    st.info(
+    "This section compares forecast outputs from multiple machine learning models."
+    )
 
     col1, col2, col3 = st.columns(3)
 
