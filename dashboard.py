@@ -154,11 +154,35 @@ elif (
 
     dataset_type = "Marketing Analytics"
     
-required_columns = [
-    "Product",
-    "Revenue",
-    "Profit"
-]
+if dataset_type == "Business Analytics":
+
+    required_columns = [
+        "Product",
+        "Revenue",
+        "Profit"
+    ]
+
+elif dataset_type == "Customer Analytics":
+
+    required_columns = [
+        "Customer",
+        "Age"
+    ]
+
+elif dataset_type == "Marketing Analytics":
+
+    required_columns = [
+        "Campaign",
+        "Clicks"
+    ]
+
+else:
+
+    st.error(
+        "❌ Unsupported dataset type."
+    )
+    st.stop()
+
 
 missing_columns = [
     col for col in required_columns
@@ -174,6 +198,71 @@ if missing_columns:
 st.success(
     f"✅ {dataset_type} Dataset Detected"
 )
+
+if dataset_type == "Customer Analytics":
+
+    st.info("👥 Customer Analytics Module")
+
+    st.write(f"Rows: {df.shape[0]}")
+    st.write(f"Columns: {df.shape[1]}")
+
+    st.subheader("👥 Customer Analytics")
+
+    st.write("Column Names:")
+    st.write(list(df.columns))
+
+    if "Age" in df.columns:
+
+        st.write(
+            f"Average Age: {df['Age'].mean():.1f}"
+        )
+
+        st.write(
+            f"Youngest Age: {df['Age'].min()}"
+        )
+
+        st.write(
+            f"Oldest Age: {df['Age'].max()}"
+        )
+
+    if "Country" in df.columns:
+
+        st.write("Countries:")
+
+        st.write(
+            df["Country"].unique()
+        )
+
+        st.write(
+            f"Countries Count: {df['Country'].nunique()}"
+        )
+
+        st.stop()
+
+elif dataset_type == "Marketing Analytics":
+
+    st.info("📢 Marketing Analytics Module")
+
+    st.write(f"Rows: {df.shape[0]}")
+    st.write(f"Columns: {df.shape[1]}")
+
+    st.subheader("📢 Marketing Analytics")
+
+    st.write("Column Names:")
+    st.write(list(df.columns))
+
+    if "Clicks" in df.columns:
+        st.write(
+            f"Total Clicks: {df['Clicks'].sum()}"
+        )
+
+    if "Campaign" in df.columns:
+        st.write("Campaigns:")
+        st.write(
+            df["Campaign"].unique()
+        )
+
+    st.stop()
 
 
 if page == "📊 Dashboard":
