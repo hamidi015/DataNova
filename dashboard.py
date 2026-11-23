@@ -132,6 +132,28 @@ else:
         sheet_name=selected_sheet
     )
 
+dataset_type = "Unknown"
+
+if (
+    "Product" in df.columns
+    and "Revenue" in df.columns
+    and "Profit" in df.columns
+):
+    dataset_type = "Business Analytics"
+
+elif (
+    "Customer" in df.columns
+    and "Age" in df.columns
+):
+    dataset_type = "Customer Analytics"
+
+elif (
+    "Campaign" in df.columns
+    and "Clicks" in df.columns
+):
+
+    dataset_type = "Marketing Analytics"
+    
 required_columns = [
     "Product",
     "Revenue",
@@ -149,7 +171,9 @@ if missing_columns:
     )
     st.stop()
 
-st.success("✅ Valid DataNova dataset detected.")
+st.success(
+    f"✅ {dataset_type} Dataset Detected"
+)
 
 
 if page == "📊 Dashboard":
@@ -418,19 +442,53 @@ if page == "📊 Dashboard":
 
 if page == "📊 Dashboard":
 
-    st.subheader("Automatic Summary Generator")
+    st.subheader("🤖 AI Dataset Analyzer")
+
+    if profit_margin >= 20:
+        recommendation = (
+            "Continue investing in top-performing products and expand the business."
+        )
+
+    elif profit_margin >= 10:
+        recommendation = (
+            "Business performance is stable. Continue monitoring growth."
+        )
+
+    else:
+        recommendation = (
+            "Profit margins are low. Review pricing and profitability."
+        )
+
+    if missing_values == 0:
+        data_quality = "Excellent"
+
+    elif missing_values <= 5:
+        data_quality = "Good"
+
+    else:
+        data_quality = "Poor"
 
     summary = f"""
-    The dataset contains {len(df)} products.
 
-    Selected revenue is {selected_revenue}.
+📊 Dataset Overview
 
-    Selected profit is {selected_profit}.
+• Products analyzed: {len(df)}
 
-    Selected product is {selected_product}.
+• Total Revenue: {selected_revenue}
 
-    Profit margin is {profit_margin:.2f}%.
-    """
+• Total Profit: {selected_profit}
+
+• Selected Product: {selected_product}
+
+• Profit Margin: {profit_margin:.2f}%
+
+✅ Data Quality: {data_quality}
+
+🎯 Business Health Score: Available in Executive Summary section
+
+💡 AI Recommendation:
+{recommendation}
+"""
 
     st.write(summary)
 
