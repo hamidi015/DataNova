@@ -829,11 +829,23 @@ if page == "🤖 AI Assistant":
 
         elif "business health" in user_question.lower():
             st.success(f"Business Health Score: {score}/100")
-
+        
         elif "investment" in user_question.lower():
-            st.success(
-                "Recommendation: Increase investment and business expansion."
-        )
+
+            if score >= 80:
+                st.success(
+                    "Recommendation: Increase investment and business expansion."
+                )
+
+            elif score >= 60:
+                st.info(
+                    "Recommendation: Maintain current strategy and monitor growth."
+                )
+
+            else:
+                st.warning(
+                    "Recommendation: Review business performance before increasing investment."
+                )
 
         elif "accurate" in user_question.lower():
             st.success(
