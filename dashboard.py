@@ -132,6 +132,26 @@ else:
         sheet_name=selected_sheet
     )
 
+required_columns = [
+    "Product",
+    "Revenue",
+    "Profit"
+]
+
+missing_columns = [
+    col for col in required_columns
+    if col not in df.columns
+]
+
+if missing_columns:
+    st.error(
+        f"❌ Missing required columns: {', '.join(missing_columns)}"
+    )
+    st.stop()
+
+st.success("✅ Valid DataNova dataset detected.")
+
+
 if page == "📊 Dashboard":
 
     st.success(
@@ -304,25 +324,25 @@ if page == "📊 Dashboard":
 
     with col1:
         st.metric(
-            "Selected Revenue",
+            "💰 Revenue",
             selected_revenue
     )
 
     with col2:
         st.metric(
-            "Selected Profit",
+            "📈 Profit",
             selected_profit
     )
 
     with col3:
         st.metric(
-            "Profit Margin %",
+            "📊 Margin",
             f"{profit_margin:.2f}%"
     )
 
     with col4:
         st.metric(
-            "Products",
+            "📦 Products",
             len(df)
     )
 ####################### bis here #############
