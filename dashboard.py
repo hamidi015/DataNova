@@ -3,6 +3,21 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+st.markdown("""
+<style>
+
+div[data-testid="metric-container"] {
+    background: rgba(20,20,20,0.9);
+    border: 2px solid #00D4FF;
+    padding: 18px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,212,255,0.6);
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 from sklearn.ensemble import RandomForestRegressor
@@ -20,7 +35,25 @@ uploaded_file = st.file_uploader(
     type=["csv", "xlsx"]
 )
 
-st.title("🚀 DataNova v8.7 AI Business Analytics Platform")
+col1, col2 = st.columns([1, 4])
+
+with col1:
+    st.image(
+        "assets/datanova_logo.png",
+        width=140
+    )
+
+with col2:
+    st.title("🚀 DataNova v8.7")
+    st.caption(
+        "AI-Powered Business Analytics & Forecasting Platform"
+    )
+
+st.markdown("""
+### 🤖 AI-Powered Business Analytics & Forecasting Platform
+
+Transforming business data into intelligent decisions.
+""")
 
 st.caption("AI-Powered Business Analytics Dashboard")
 
