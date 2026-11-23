@@ -858,12 +858,17 @@ if page == "🤖 AI Assistant":
         elif "growth" in user_question.lower():
             st.success(
                 f"Expected Growth: {growth_rate:.2f}%"
-        )
+            )
+
+        elif "forecast growth" in user_question.lower():
+            st.success(
+                f"Forecast Growth Rate: {growth_rate:.2f}%"
+            )
 
         elif "profit" in user_question.lower():
             st.success(
                 f"Total Profit: {total_profit}"
-        )
+            )
         
         elif "best model" in user_question.lower():
             st.success(
