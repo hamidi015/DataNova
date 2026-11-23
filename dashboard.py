@@ -798,10 +798,21 @@ if page == "🤖 AI Assistant":
     )
 
     st.subheader("🤖 Ask DataNova")
-    
+
+    st.markdown("""
+    ### Try asking:
+
+- What is my best product?
+- What is the forecast revenue?
+- What is my total profit?
+- What is my business health score?
+- Which model is most accurate?
+- Should I increase investment?
+""")
+
     st.info(
-    "Ask me about products, forecasts, business health, investment, or machine learning models."
-)
+        "Ask me about products, forecasts, business health, investment, or machine learning models."
+    )
     
     user_question = st.text_input(
         "Ask DataNova anything"
