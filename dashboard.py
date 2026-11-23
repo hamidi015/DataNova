@@ -1,5 +1,12 @@
 import plotly.express as px
 import streamlit as st
+
+st.set_page_config(
+    page_title="DataNova",
+    page_icon="🚀",
+    layout="wide"
+)
+
 import pandas as pd
 import numpy as np
 
@@ -40,7 +47,7 @@ col1, col2 = st.columns([1, 4])
 with col1:
     st.image(
         "assets/datanova_logo.png",
-        width=140
+        width=220
     )
 
 with col2:
