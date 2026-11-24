@@ -199,6 +199,61 @@ st.success(
     f"✅ {dataset_type} Dataset Detected"
 )
 
+numeric_columns = list(
+    df.select_dtypes(include="number").columns
+)
+
+categorical_columns = list(
+    df.select_dtypes(exclude="number").columns
+)
+
+st.info(
+    f"Numeric Columns: {numeric_columns}"
+)
+
+st.info(
+    f"Categorical Columns: {categorical_columns}"
+)
+
+if len(numeric_columns) > 0:
+
+    selected_target = st.selectbox(
+        "🎯 Select Target Column",
+        numeric_columns
+    )
+    
+st.write("Selected Target:", selected_target)
+
+st.write("All Numeric Columns:")
+st.write(numeric_columns)
+
+
+st.subheader("🤖 AI Dataset Summary")
+
+st.write(
+    f"This dataset contains {df.shape[0]} rows and {df.shape[1]} columns."
+)
+
+st.write(
+    f"Detected {len(numeric_columns)} numeric column(s)."
+)
+
+st.write(
+    f"Detected {len(categorical_columns)} categorical column(s)."
+)
+
+if len(numeric_columns) > len(categorical_columns):
+
+    st.success(
+        "This dataset appears to be primarily numerical and suitable for machine learning and forecasting."
+    )
+
+else:
+
+    st.success(
+        "This dataset appears to contain significant categorical information and is suitable for segmentation and visualization."
+    )
+
 if dataset_type == "Customer Analytics":
 
     st.info("👥 Customer Analytics Module")
@@ -211,27 +266,36 @@ if dataset_type == "Customer Analytics":
     st.write("Column Names:")
     st.write(list(df.columns))
 
-    if "Age" in df.columns:
+if "Age" in df.columns:
 
-        st.write(
-            f"Average Age: {df['Age'].mean():.1f}"
-        )
-    
-        st.write(
-            f"Youngest Age: {df['Age'].min()}"
+    st.write(
+        f"Average Age: {df['Age'].mean():.1f}"
+    )
+
+    st.write(
+        f"Youngest Age: {df['Age'].min()}"
+    )
+
+    st.write(
+        f"Oldest Age: {df['Age'].max()}"
+    )
+
+    average_age = df['Age'].mean()
+
+    st.subheader("🤖 AI Customer Insight")
+
+    if average_age < 35:
+
+        st.success(
+            "Customer base is relatively young. Focus on digital engagement and mobile-first strategies."
         )
 
-        st.write(
-            f"Oldest Age: {df['Age'].max()}"
+    else:
+
+        st.success(
+            "Customer base is mature. Focus on loyalty programs and personalized services."
         )
 
-        st.write(
-            f"Youngest Age: {df['Age'].min()}"
-        )
-
-        st.write(
-            f"Oldest Age: {df['Age'].max()}"
-        )
 
     if "Country" in df.columns:
 
@@ -248,6 +312,22 @@ if dataset_type == "Customer Analytics":
         st.write(
             f"Countries Count: {df['Country'].nunique()}"
         )
+
+        if len(numeric_columns) > 0 and len(categorical_columns) > 0:
+
+            st.subheader("📊 Automatic Visualization")
+
+            auto_chart = px.bar(
+                df,
+                x=categorical_columns[0],
+                y=numeric_columns[0],
+                title="Automatic Dataset Visualization"
+            )
+
+            st.plotly_chart(
+                auto_chart,
+                use_container_width=True
+            )
 
         st.stop()
 

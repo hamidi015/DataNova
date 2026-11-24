@@ -21,8 +21,18 @@ def show(uploaded_file):
     numeric_df = df.select_dtypes(include=[np.number])
     
     if len(numeric_df.columns) < 2:
-        st.error("❌ Need at least 2 numeric columns for ML training")
-        st.stop()
+        st.error(
+    "❌ Machine Learning requires at least 2 numeric columns."
+    )
+
+    st.info(
+        f"Detected numeric columns: {list(numeric_df.columns)}"
+    )
+
+    st.info(
+        "Examples: Revenue & Profit, Age & Salary, Clicks & Conversions."
+    )
+    st.stop()
     
     # Use last column as target, others as features
     X = numeric_df.iloc[:, :-1]
