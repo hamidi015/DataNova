@@ -216,6 +216,14 @@ if dataset_type == "Customer Analytics":
         st.write(
             f"Average Age: {df['Age'].mean():.1f}"
         )
+    
+        st.write(
+            f"Youngest Age: {df['Age'].min()}"
+        )
+
+        st.write(
+            f"Oldest Age: {df['Age'].max()}"
+        )
 
         st.write(
             f"Youngest Age: {df['Age'].min()}"
@@ -231,6 +239,10 @@ if dataset_type == "Customer Analytics":
 
         st.write(
             df["Country"].unique()
+        )
+        
+        st.write(
+            f"Countries Count: {df['Country'].nunique()}"
         )
 
         st.write(
