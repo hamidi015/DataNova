@@ -329,7 +329,6 @@ if "Age" in df.columns:
                 use_container_width=True
             )
 
-        st.stop()
 
 elif dataset_type == "Marketing Analytics":
 
@@ -354,16 +353,9 @@ elif dataset_type == "Marketing Analytics":
             df["Campaign"].unique()
         )
 
-    st.stop()
 
 
-if page == "📊 Dashboard":
-
-    st.success(
-        f"Loaded file: {uploaded_file.name}"
-    )
-
-if page == "📊 Dashboard":
+if page == "📊 Dashboard" and "Product" in df.columns:
 
     product_options = ["All Products"] + list(df["Product"])
 
@@ -380,6 +372,7 @@ else:
 
     selected_product = "All Products"
     search_term = ""
+
 
 if page == "📊 Dashboard":
     st.info(
@@ -402,9 +395,15 @@ if search_term:
         )
     ]
 
-selected_revenue = filtered_df["Revenue"].sum()
+if "Revenue" in filtered_df.columns:
+    selected_revenue = filtered_df["Revenue"].sum()
+else:
+    selected_revenue = 0
 
-selected_profit = filtered_df["Profit"].sum()
+if "Profit" in filtered_df.columns:
+    selected_profit = filtered_df["Profit"].sum()
+else:
+    selected_profit = 0
 
 # =====================================
 # DASHBOARD PAGE
@@ -447,7 +446,10 @@ if page == "📊 Dashboard":
 
 
 
-total_revenue = df["Revenue"].sum()
+if "Revenue" in df.columns:
+    total_revenue = df["Revenue"].sum()
+else:
+    total_revenue = 0
 
 history_df = pd.read_csv("data/sales_history.csv")
 
@@ -507,21 +509,31 @@ forecast_df.loc[len(forecast_df)] = [
     ml_prediction
 ]
 
-total_profit = df["Profit"].sum()
+if "Profit" in df.columns:
+    total_profit = df["Profit"].sum()
+else:
+    total_profit = 0
 
 predicted_revenue = total_revenue * 1.10
 
 missing_values = df.isnull().sum().sum()
 
-growth_rate = (
-    (predicted_revenue - total_revenue)
-    / total_revenue
-) * 100
+if total_revenue > 0:
+    growth_rate = (
+        (predicted_revenue - total_revenue)
+        / total_revenue
+    ) * 100
+else:
+    growth_rate = 0
 
 
-profit_margin = (
-    selected_profit / selected_revenue
-) * 100
+if selected_revenue > 0:
+    profit_margin = (
+        selected_profit / selected_revenue
+    ) * 100
+else:
+    profit_margin = 0
+    
 ##### Here I did changes I will come back for it later########
 if page == "📊 Dashboard":
 
@@ -557,22 +569,20 @@ if page == "📊 Dashboard":
     with col1:
         st.subheader("Revenue by Product")
 
-        fig = px.bar(
-            df,
-            x="Product",
-            y="Revenue",
-            color="Product",
-            title="Revenue by Product"
-        )
+    fig = px.bar(
+        df,
+        x=categorical_columns[0],
+        y=numeric_columns[0],
+        color=categorical_columns[0],
+        title="Dataset Overview"
+    )
 
-        st.plotly_chart(fig)
+    st.plotly_chart(fig)
 
     with col2:
         st.subheader("Revenue Table")
 
-        st.dataframe(
-            df[["Product", "Revenue"]]
-        )
+        st.dataframe(df)
 
 if page == "📊 Dashboard":
 
@@ -580,10 +590,10 @@ if page == "📊 Dashboard":
 
     profit_fig = px.bar(
         df,
-        x="Product",
-        y="Profit",
-        color="Product",
-        title="Profit by Product"
+        x=categorical_columns[0],
+        y=numeric_columns[0],
+        color=categorical_columns[0],
+        title="Dataset Analysis"
     )
 
     st.plotly_chart(profit_fig)
@@ -592,16 +602,13 @@ if page == "📊 Dashboard":
 
     st.subheader("Revenue vs Profit Comparison")
 
-comparison_df = df[
-    ["Product", "Revenue", "Profit"]
-]
+comparison_df = df
 
 comparison_fig = px.bar(
     comparison_df,
-    x="Product",
-    y=["Revenue", "Profit"],
-    barmode="group",
-    title="Revenue vs Profit"
+    x=categorical_columns[0],
+    y=numeric_columns[0],
+    title="Dataset Comparison"
 )
 
 st.plotly_chart(
@@ -610,10 +617,16 @@ st.plotly_chart(
 )
 
 
-best_product = df.loc[
-    df["Revenue"].idxmax(),
-    "Product"
-]
+if "Revenue" in df.columns and "Product" in df.columns:
+
+    best_product = df.loc[
+        df["Revenue"].idxmax(),
+        "Product"
+    ]
+
+else:
+
+    best_product = "N/A"
 
 if page == "📊 Dashboard":
 
@@ -717,11 +730,17 @@ if page == "📊 Dashboard":
 
     st.subheader("Revenue Statistics")
 
-    st.write(f"Maximum Revenue: {df['Revenue'].max()}")
+    if "Revenue" in df.columns:
 
-    st.write(f"Minimum Revenue: {df['Revenue'].min()}")
+        st.write(f"Maximum Revenue: {df['Revenue'].max()}")
 
-    st.write(f"Average Revenue: {df['Revenue'].mean():.2f}")
+        st.write(f"Minimum Revenue: {df['Revenue'].min()}")
+
+        st.write(f"Average Revenue: {df['Revenue'].mean():.2f}")
+
+    else:
+
+        st.info("Revenue statistics are not available for this dataset.")
 
 
 
@@ -825,14 +844,22 @@ if page == "📊 Dashboard":
 
     st.subheader("Product Ranking")
 
-    ranking = df.sort_values(
-        by="Revenue",
-        ascending=False
-    )
+    if "Revenue" in df.columns and "Product" in df.columns:
 
-    st.dataframe(
-        ranking[["Product", "Revenue"]]
-    )
+        ranking = df.sort_values(
+            by="Revenue",
+            ascending=False
+        )
+
+        st.dataframe(
+            ranking[["Product", "Revenue"]]
+        )
+
+    else:
+
+        st.info(
+            "Product ranking is not available for this dataset."
+        )
 
 if page == "📊 Dashboard":
 
@@ -852,56 +879,75 @@ if page == "📊 Dashboard":
 
 if page == "📊 Dashboard":
 
-    st.subheader("Revenue Share by Product")
+    st.subheader("Dataset Share")
 
     pie_fig = px.pie(
         df,
-        values="Revenue",
-        names="Product",
-        title="Revenue Share by Product"
+        values=numeric_columns[0],
+        names=categorical_columns[0],
+        title="Dataset Distribution"
     )
 
     st.plotly_chart(pie_fig)
 
 if page == "📊 Dashboard":
 
-    st.subheader("Revenue Trend Insight")
+    st.subheader("Dataset Trend Insight")
 
-    if df["Revenue"].iloc[0] > df["Revenue"].iloc[-1]:
-        st.warning(
-            "Revenue trend is decreasing."
+    if "Revenue" in df.columns:
+
+        if df["Revenue"].iloc[0] > df["Revenue"].iloc[-1]:
+
+            st.warning(
+                "Revenue trend is decreasing."
+            )
+
+        else:
+
+            st.success(
+                "Revenue trend is increasing."
+            )
+
+        st.subheader("Revenue Trend Analysis")
+
+        trend_fig = px.line(
+            df,
+            x="Product",
+            y="Revenue",
+            markers=True,
+            title="Revenue Trend"
         )
+
+        st.plotly_chart(
+            trend_fig,
+            key="revenue_trend_chart"
+        )
+
     else:
-        st.success(
-            "Revenue trend is increasing."
+
+        st.info(
+            "Revenue trend analysis is not available for this dataset."
         )
-
-    st.subheader("Revenue Trend Analysis")
-
-    trend_fig = px.line(
-        df,
-        x="Product",
-        y="Revenue",
-        markers=True,
-        title="Revenue Trend"
-    )
-
-    st.plotly_chart(
-        trend_fig,
-        key="revenue_trend_chart"
-    )
 
 
     st.subheader("Top Product Share")
 
-    top_share = (
-        df["Revenue"].max()
-        / total_revenue
-    ) * 100
+    if "Revenue" in df.columns and total_revenue > 0:
 
-    st.write(
-        f"{best_product} contributes {top_share:.2f}% of total revenue."
-    )
+        top_share = (
+            df["Revenue"].max()
+            / total_revenue
+        ) * 100
+
+        st.write(
+            f"{best_product} contributes {top_share:.2f}% of total revenue."
+        )
+
+    else:
+
+        st.info(
+            "Product share analysis is not available for this dataset."
+        )
 
 
 
@@ -1082,8 +1128,10 @@ if page == "🤖 AI Assistant":
 
     st.subheader("🤖 AI Business Summary")
 
-    st.success(
-        f"""
+    if dataset_type == "Business Analytics":
+
+        st.success(
+            f"""
 🏆 Best Product: {best_product}
 
 💰 Total Revenue: {total_revenue}
@@ -1096,10 +1144,35 @@ if page == "🤖 AI Assistant":
 """
     )
 
+    elif dataset_type == "Customer Analytics":
+
+        st.success(
+            f"""
+👥 Average Age: {df['Age'].mean():.1f}
+
+🌍 Countries: {df['Country'].nunique()}
+
+🤖 Customer base appears diverse and relatively young.
+"""
+    )
+
+    elif dataset_type == "Marketing Analytics":
+
+        st.success(
+        f"""
+📢 Total Clicks: {df['Clicks'].sum()}
+
+📈 Campaigns: {df['Campaign'].nunique()}
+
+🤖 Marketing engagement appears healthy.
+"""
+    )
+
     st.subheader("🤖 Ask DataNova")
 
     st.markdown("""
-    ### Try asking:
+
+### Try asking:
 
 - What is my best product?
 - What is the forecast revenue?
@@ -1514,11 +1587,19 @@ if page == "📈 Forecast Center":
 # Product Summary
 if page == "📊 Dashboard":
 
-    st.write(f"Maximum Profit: {df['Profit'].max()}")
+    if "Profit" in df.columns:
 
-    st.write(f"Minimum Profit: {df['Profit'].min()}")
+        st.write(f"Maximum Profit: {df['Profit'].max()}")
 
-    st.write(f"Average Profit: {df['Profit'].mean():.2f}")
+        st.write(f"Minimum Profit: {df['Profit'].min()}")
+
+        st.write(f"Average Profit: {df['Profit'].mean():.2f}")
+
+    else:
+
+        st.info(
+            "Profit statistics are not available for this dataset."
+        )
 
 
     st.subheader("Product Summary")
