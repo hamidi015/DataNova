@@ -1553,17 +1553,6 @@ if page == "📊 Dashboard":
                 mime="application/pdf"
             )
 
-if page == "🤖 AI Assistant":
-
-    st.subheader("AI Business Advisor")
-
-    st.success(
-        f"• {best_product} is the strongest product.\n"
-        "• Business health is excellent.\n"
-        "• Continue investing in top-performing products."
-    )
-
-    st.markdown("---")
 
     st.caption(
         "DataNova v8.7 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
