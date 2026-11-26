@@ -974,6 +974,55 @@ if page == "📈 Forecast Center":
 # =====================================
 
 if page == "🤖 Machine Learning":
+    
+    if dataset_type == "Marketing Analytics":
+
+        st.title("📢 Marketing Machine Learning")
+
+        st.info(
+            "Marketing analytics model is under development."
+        )
+
+        st.metric(
+            "Total Clicks",
+            df["Clicks"].sum()
+        )
+
+        st.metric(
+            "Campaigns",
+            df["Campaign"].nunique()
+        )
+
+        st.success(
+            "Marketing dataset detected successfully."
+        )
+
+        st.stop()
+
+    if dataset_type == "Customer Analytics":
+
+        st.title("👥 Customer Machine Learning")
+
+        st.info(
+            "Customer analytics model is under development."
+        )
+
+        st.metric(
+            "Average Age",
+            f"{df['Age'].mean():.1f}"
+        )
+
+        st.metric(
+            "Countries",
+            df["Country"].nunique()
+        )
+
+        st.success(
+            "Customer dataset detected successfully."
+        )
+
+        st.stop()
+
 
     st.title("🤖 Machine Learning")
 
