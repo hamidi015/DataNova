@@ -1378,41 +1378,97 @@ if page == "🤖 AI Assistant":
         )
 
 
-    else:
-        st.warning(
-            "Sorry, I don't understand that question yet."
-        )
+else:
+    st.warning(
+        "Sorry, I don't understand that question yet."
+    )
+if dataset_type == "Customer Analytics":
 
-    
-    question = st.selectbox(
-        "Choose a business question",
+    customer_question = st.selectbox(
+        "Choose a customer question",
         [
-            "What is my best product?",
-            "Which model is most accurate?",
-            "What is the forecast revenue?",
-            "Should I increase investment?",
-            "What is my business health?"
+            "What is the average age?",
+            "How many countries are represented?",
+            "What customer insight do you have?"
         ]
     )
 
-    if question == "What is my best product?":
-        st.success(f"Best Product: {best_product}")
-
-    elif question == "Which model is most accurate?":
-        st.success("Decision Tree is currently the most accurate model.")
-
-    elif question == "What is the forecast revenue?":
-        st.success(f"Forecast Revenue: {ml_prediction:.0f}")
-
-    elif question == "Should I increase investment?":
+    if customer_question == "What is the average age?":
         st.success(
-            "Yes. Current forecast and growth rate indicate positive business performance."
+            f"Average Age: {df['Age'].mean():.1f}"
         )
 
-    elif question == "What is my business health?":
+    elif customer_question == "How many countries are represented?":
         st.success(
-            "Business health is excellent with a score of 100/100."
+            f"Countries: {df['Country'].nunique()}"
         )
+
+    elif customer_question == "What customer insight do you have?":
+        st.success(
+            "Customer base appears diverse and relatively young."
+        )
+
+    st.stop()
+
+
+
+if dataset_type == "Marketing Analytics":
+
+    marketing_question = st.selectbox(
+        "Choose a marketing question",
+        [
+            "What are the total clicks?",
+            "How many campaigns are there?",
+            "What marketing insight do you have?"
+        ]
+    )
+
+    if marketing_question == "What are the total clicks?":
+        st.success(
+            f"Total Clicks: {df['Clicks'].sum()}"
+        )
+
+    elif marketing_question == "How many campaigns are there?":
+        st.success(
+            f"Campaigns: {df['Campaign'].nunique()}"
+        )
+
+    elif marketing_question == "What marketing insight do you have?":
+        st.success(
+            "Marketing engagement appears healthy."
+        )
+
+    st.stop()
+
+question = st.selectbox(
+    "Choose a business question",
+    [
+        "What is my best product?",
+        "Which model is most accurate?",
+        "What is the forecast revenue?",
+        "Should I increase investment?",
+        "What is my business health?"
+    ]
+    )
+
+if question == "What is my best product?":
+    st.success(f"Best Product: {best_product}")
+
+elif question == "Which model is most accurate?":
+    st.success("Decision Tree is currently the most accurate model.")
+
+elif question == "What is the forecast revenue?":
+    st.success(f"Forecast Revenue: {ml_prediction:.0f}")
+
+elif question == "Should I increase investment?":
+    st.success(
+        "Yes. Current forecast and growth rate indicate positive business performance."
+    )
+
+elif question == "What is my business health?":
+    st.success(
+        "Business health is excellent with a score of 100/100."
+    )
 
 #####################################################
 
