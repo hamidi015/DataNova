@@ -954,7 +954,61 @@ if page == "📊 Dashboard":
 
 if page == "📈 Forecast Center":
 
+    if dataset_type == "Customer Analytics":
+
+        st.title("👥 Customer Forecast Center")
+
+        st.info(
+            "Customer forecasting is under development."
+        )
+
+        st.metric(
+            "Average Age",
+            f"{df['Age'].mean():.1f}"
+        )
+
+        st.metric(
+            "Countries",
+            df["Country"].nunique()
+        )
+
+        st.success(
+            "Customer Forecast Center loaded successfully."
+        )
+
+        st.stop()
+
+
+    if dataset_type == "Marketing Analytics":
+
+        st.title("📢 Marketing Forecast Center")
+
+        st.info(
+            "Marketing forecasting is under development."
+        )
+
+        st.metric(
+            "Total Clicks",
+            df["Clicks"].sum()
+        )
+
+        st.metric(
+            "Campaigns",
+            df["Campaign"].nunique()
+        )
+
+        st.success(
+            "Marketing Forecast Center loaded successfully."
+        )
+
+        st.stop()
+
+
     st.title("📈 Forecast Center")
+
+    st.success(
+        "AI-powered forecasting and future revenue analysis."
+    )
 
     st.success(
         "AI-powered forecasting and future revenue analysis."
