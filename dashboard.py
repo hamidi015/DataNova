@@ -33,6 +33,12 @@ from sklearn.tree import DecisionTreeRegressor
 
 from modules.pdf_report import generate_pdf_report
 
+from modules.customer_segmentation import (
+    segment_customers,
+    get_largest_segment,
+    get_recommendation
+)
+
 # =====================================
 # SHARED SECTION - ALL PAGES
 # =====================================
@@ -1069,6 +1075,40 @@ if page == "🤖 Machine Learning":
         st.metric(
             "Countries",
             df["Country"].nunique()
+        )
+
+        segments = segment_customers(df)
+
+        largest_segment = get_largest_segment(
+            segments
+        )
+
+        recommendation = get_recommendation(
+            largest_segment
+        )
+
+        st.subheader(
+            "🎯 Customer Segmentation"
+        )
+
+        st.write(
+            f"Young Customers: {segments['Young']}"
+        )
+
+        st.write(
+            f"Middle Age Customers: {segments['Middle']}"
+        )
+
+        st.write(
+            f"Senior Customers: {segments['Senior']}"
+        )
+
+        st.success(
+            f"Largest Segment: {largest_segment}"
+        )
+
+        st.info(
+            recommendation
         )
 
         st.success(
