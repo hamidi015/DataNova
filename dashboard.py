@@ -40,10 +40,20 @@ from modules.customer_segmentation import (
 )
 
 from modules.profit_analysis import (
+
     total_profit,
     most_profitable_product,
     least_profitable_product,
     highest_revenue_product
+
+)
+
+from modules.campaign_ranking import (
+
+    best_campaign,
+    worst_campaign,
+    campaign_leaderboard
+
 )
 
 # =====================================
@@ -1079,6 +1089,8 @@ if page == "🤖 Machine Learning":
             f"{df['Age'].mean():.1f}"
         )
 
+if "Country" in df.columns:
+
     st.metric(
         "Countries",
         df["Country"].nunique()
@@ -1122,7 +1134,7 @@ if page == "🤖 Machine Learning":
         "Customer dataset detected successfully."
     )
 
-    st.stop()
+    #st.stop()
 
 
     st.title("🤖 Machine Learning")
@@ -1272,6 +1284,29 @@ if page == "🤖 Machine Learning":
     else:
         st.info(
             "Profit analysis requires Product and Profit columns."
+        )
+
+
+    st.subheader("📢 Campaign Intelligence")
+
+    if "Campaign" in df.columns and "Revenue" in df.columns:
+
+        st.success(
+            f"Best Campaign: {best_campaign(df)}"
+        )
+
+        st.warning(
+            f"Worst Campaign: {worst_campaign(df)}"
+        )
+
+        st.dataframe(
+            campaign_leaderboard(df)
+        )
+
+    else:
+
+        st.info(
+            "Campaign analysis requires Campaign and Revenue columns."
         )
 
 if page == "🤖 AI Assistant":
