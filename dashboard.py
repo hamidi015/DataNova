@@ -533,9 +533,9 @@ forecast_df.loc[len(forecast_df)] = [
 ]
 
 if "Profit" in df.columns:
-    total_profit = df["Profit"].sum()
+    total_profit_value = df["Profit"].sum()
 else:
-    total_profit = 0
+    total_profit_value = 0
 
 predicted_revenue = total_revenue * 1.10
 
@@ -785,7 +785,7 @@ score = 100
 if missing_values > 0:
     score -= 20
 
-if total_profit < 500:
+if total_profit_value < 500:
     score -= 20
 
 if total_revenue < 2000:
@@ -813,7 +813,7 @@ if page == "📊 Dashboard":
     with col2:
         st.metric(
             "Profit",
-            total_profit
+            total_profit_value
         )
 
     with col3:
@@ -849,7 +849,7 @@ if page == "📊 Dashboard":
 
     st.subheader("Smart Business Insight")
 
-    if total_profit > 500:
+    if total_profit_value > 500:
         st.success("Business is performing well. Profit is above 500.")
     else:
         st.warning("Business profit needs improvement.")
@@ -1089,46 +1089,46 @@ if page == "🤖 Machine Learning":
             f"{df['Age'].mean():.1f}"
         )
 
-if "Country" in df.columns:
+    if "Country" in df.columns:
 
-    st.metric(
-        "Countries",
-        df["Country"].nunique()
-    )
+        st.metric(
+            "Countries",
+            df["Country"].nunique()
+        )
 
-    segments = segment_customers(df)
+        segments = segment_customers(df)
 
-    largest_segment = get_largest_segment(
-        segments
-    )
+        largest_segment = get_largest_segment(
+            segments
+        )
 
-    recommendation = get_recommendation(
-        largest_segment
-    )
+        recommendation = get_recommendation(
+            largest_segment
+        )
 
-    st.subheader(
-        "🎯 Customer Segmentation"
-    )
+        st.subheader(
+            "🎯 Customer Segmentation"
+        )
 
-    st.write(
-        f"Young Customers: {segments['Young']}"
-    )
+        st.write(
+            f"Young Customers: {segments['Young']}"
+        )
 
-    st.write(
-        f"Middle Age Customers: {segments['Middle']}"
-    )
+        st.write(
+            f"Middle Age Customers: {segments['Middle']}"
+        )
 
-    st.write(
-        f"Senior Customers: {segments['Senior']}"
-    )
+        st.write(
+            f"Senior Customers: {segments['Senior']}"
+        )
 
-    st.success(
-        f"Largest Segment: {largest_segment}"
-    )
+        st.success(
+            f"Largest Segment: {largest_segment}"
+        )
 
-    st.info(
-        recommendation
-    )
+        st.info(
+            recommendation
+        )
 
     st.success(
         "Customer dataset detected successfully."
@@ -1346,7 +1346,7 @@ if page == "🤖 AI Assistant":
 
 💰 Total Revenue: {total_revenue}
 
-💵 Total Profit: {total_profit}
+💵 Total Profit: {total_profit_value}
 
 🎯 Business Health Score: {score}/100
 
@@ -1461,7 +1461,7 @@ if page == "🤖 AI Assistant":
 
         elif "profit" in user_question.lower():
             st.success(
-                f"Total Profit: {total_profit}"
+                f"Total Profit: {total_profit_value}"
             )
         
         elif "best model" in user_question.lower():
