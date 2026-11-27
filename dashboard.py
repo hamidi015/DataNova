@@ -39,6 +39,13 @@ from modules.customer_segmentation import (
     get_recommendation
 )
 
+from modules.profit_analysis import (
+    total_profit,
+    most_profitable_product,
+    least_profitable_product,
+    highest_revenue_product
+)
+
 # =====================================
 # SHARED SECTION - ALL PAGES
 # =====================================
@@ -1072,50 +1079,50 @@ if page == "🤖 Machine Learning":
             f"{df['Age'].mean():.1f}"
         )
 
-        st.metric(
-            "Countries",
-            df["Country"].nunique()
-        )
+    st.metric(
+        "Countries",
+        df["Country"].nunique()
+    )
 
-        segments = segment_customers(df)
+    segments = segment_customers(df)
 
-        largest_segment = get_largest_segment(
-            segments
-        )
+    largest_segment = get_largest_segment(
+        segments
+    )
 
-        recommendation = get_recommendation(
-            largest_segment
-        )
+    recommendation = get_recommendation(
+        largest_segment
+    )
 
-        st.subheader(
-            "🎯 Customer Segmentation"
-        )
+    st.subheader(
+        "🎯 Customer Segmentation"
+    )
 
-        st.write(
-            f"Young Customers: {segments['Young']}"
-        )
+    st.write(
+        f"Young Customers: {segments['Young']}"
+    )
 
-        st.write(
-            f"Middle Age Customers: {segments['Middle']}"
-        )
+    st.write(
+        f"Middle Age Customers: {segments['Middle']}"
+    )
 
-        st.write(
-            f"Senior Customers: {segments['Senior']}"
-        )
+    st.write(
+        f"Senior Customers: {segments['Senior']}"
+    )
 
-        st.success(
-            f"Largest Segment: {largest_segment}"
-        )
+    st.success(
+        f"Largest Segment: {largest_segment}"
+    )
 
-        st.info(
-            recommendation
-        )
+    st.info(
+        recommendation
+    )
 
-        st.success(
-            "Customer dataset detected successfully."
-        )
+    st.success(
+        "Customer dataset detected successfully."
+    )
 
-        st.stop()
+    st.stop()
 
 
     st.title("🤖 Machine Learning")
@@ -1241,6 +1248,31 @@ if page == "🤖 Machine Learning":
     )
 
     st.plotly_chart(chart_fig)
+    
+    st.subheader("💰 Profit Intelligence")
+
+    if "Profit" in df.columns and "Product" in df.columns:
+
+        st.success(
+            f"Total Profit: ${total_profit(df):,.2f}"
+        )
+
+        st.info(
+            f"Most Profitable Product: {most_profitable_product(df)}"
+        )
+
+        st.warning(
+            f"Least Profitable Product: {least_profitable_product(df)}"
+        )
+
+        st.write(
+            f"Highest Revenue Product: {highest_revenue_product(df)}"
+        )
+
+    else:
+        st.info(
+            "Profit analysis requires Product and Profit columns."
+        )
 
 if page == "🤖 AI Assistant":
         
