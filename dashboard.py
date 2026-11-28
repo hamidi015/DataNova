@@ -56,6 +56,12 @@ from modules.campaign_ranking import (
 
 )
 
+from modules.recommendation_engine import (
+
+    generate_recommendation
+
+)
+
 # =====================================
 # SHARED SECTION - ALL PAGES
 # =====================================
@@ -74,7 +80,7 @@ with col1:
     )
 
 with col2:
-    st.title("🚀 DataNova v8.7")
+    st.title("🚀 DataNova v8.8")
     st.caption(
         "AI-Powered Business Analytics & Forecasting Platform"
     )
@@ -99,7 +105,7 @@ page = st.sidebar.radio(
 
 st.sidebar.markdown("---")
 
-st.sidebar.success("🚀 DataNova v8.7")
+st.sidebar.success("🚀 DataNova v8.8")
 
 st.sidebar.markdown("---")
 
@@ -1038,7 +1044,7 @@ if page == "📈 Forecast Center":
     )
 
     st.caption(
-        "DataNova v8.7 | AI-Powered Multi-Model Forecasting Platform"
+        "DataNova v8.8 | AI-Powered Multi-Model Forecasting Platform"
     )
 
     st.info(
@@ -1308,6 +1314,14 @@ if page == "🤖 Machine Learning":
         st.info(
             "Campaign analysis requires Campaign and Revenue columns."
         )
+        
+        st.subheader("🧠 AI Recommendation Engine")
+
+        recommendation_text = generate_recommendation(df)
+
+        st.success(
+            recommendation_text
+        )
 
 if page == "🤖 AI Assistant":
         
@@ -1333,7 +1347,7 @@ if page == "🤖 AI Assistant":
 
     st.metric(
         "Version",
-        "v8.7"
+        "v8.8"
     )
 
     st.subheader("🤖 AI Business Summary")
@@ -1902,5 +1916,5 @@ if page == "📊 Dashboard":
 
 
     st.caption(
-        "DataNova v8.7 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
+        "DataNova v8.8 | Built with Python, Pandas, Plotly, Scikit-Learn and Streamlit"
     )
